@@ -5,6 +5,7 @@ The option to adjust the brake is included in the code.
 The PCB also includes a CMT2150A transponder for a custom RF lap reader.
 
 The firmware will be used for cars.
+The code is Arduino.
 
 Works with RC transmitters [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev) or [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
