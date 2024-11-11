@@ -2,6 +2,7 @@
 Includes nRF24L01+ transceiver and ATmega328P processor.
 
 The firmware will be used for cars, boats, tanks, robots and aircraft.
+The code is Arduino.
 
 Works with RC transmitters [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED) or [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED) from my fork.
 
