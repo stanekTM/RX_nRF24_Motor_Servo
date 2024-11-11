@@ -4,6 +4,7 @@ The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and other
 The option to adjust the brake is included in the code.
 
 The firmware will be used for boats, tanks and robots.
+The code is Arduino.
 
 Works with RC transmitters [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED) or [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED) from my fork.
 
