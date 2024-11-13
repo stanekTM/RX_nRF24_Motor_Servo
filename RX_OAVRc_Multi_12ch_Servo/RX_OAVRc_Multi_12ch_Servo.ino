@@ -88,9 +88,9 @@ rc_packet_size rc_packet;
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
-  byte rssi;    //0-255 for OpenAVRc and OpenTX Multiprotocol telemetry
-  byte batt_A1; //0-255 for OpenAVRc and OpenTX Multiprotocol telemetry
-  byte batt_A2; //0-255 for OpenAVRc and OpenTX Multiprotocol telemetry (not used yet)
+  byte rssi;
+  byte batt_A1;
+  byte batt_A2; //not used yet
 };
 telemetry_packet_size telemetry_packet;
 

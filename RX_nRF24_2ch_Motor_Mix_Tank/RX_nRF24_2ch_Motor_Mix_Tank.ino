@@ -100,9 +100,6 @@ struct rc_packet_size
 {
   unsigned int ch_motorA = MID_CONTROL_VAL;
   unsigned int ch_motorB = MID_CONTROL_VAL;
-  unsigned int ch_servo1 = MID_CONTROL_VAL; //unused channel, only adding byte array TX 5ch
-  unsigned int ch_servo2 = MID_CONTROL_VAL; //unused channel, only adding byte array TX 5ch
-  unsigned int ch_servo3 = MID_CONTROL_VAL; //unused channel, only adding byte array TX 5ch
 };
 rc_packet_size rc_packet;
 
@@ -111,9 +108,9 @@ rc_packet_size rc_packet;
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
-  byte rssi;     //not used yet
-  float batt_A1;
-  float batt_A2; //not used yet
+  byte rssi;
+  byte batt_A1;
+  byte batt_A2; //not used yet
 };
 telemetry_packet_size telemetry_packet;
 
@@ -197,8 +194,6 @@ void output_PWM()
 //*********************************************************************************************************************
 //initial main settings ***********************************************************************************************
 //*********************************************************************************************************************
-//const byte invert_address = ~address[5]; //invert bits for writing so that telemetry packets have a different address
-
 void setup()
 {
   //Serial.begin(9600); //print value ​​on a serial monitor
@@ -227,7 +222,6 @@ void setup()
   radio.setChannel(RADIO_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_MIN); //RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
-  //radio.openWritingPipe(invert_address);
   radio.openReadingPipe(1, address);
   radio.startListening();
 }
@@ -262,16 +256,34 @@ void fail_safe_time()
 //*********************************************************************************************************************
 //send and receive data ***********************************************************************************************
 //*********************************************************************************************************************
+byte telemetry_counter = 0;
+unsigned int packet_state;
+
 void send_and_receive_data()
 {
   if (radio.available())
   {
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
-   
+    
     radio.read(&rc_packet, sizeof(rc_packet_size));
+
+    telemetry_counter++;
     
     battery_check();
     fs_time = millis();
+  }
+  
+  if (packet_state++ > 8130)
+  {
+    if (telemetry_counter < 10)                            telemetry_packet.rssi = 0;
+    if (telemetry_counter > 10 && telemetry_counter < 30)  telemetry_packet.rssi = 10;
+    if (telemetry_counter > 30 && telemetry_counter < 60)  telemetry_packet.rssi = 50;
+    if (telemetry_counter > 60 && telemetry_counter < 80)  telemetry_packet.rssi = 70;
+    if (telemetry_counter > 80 && telemetry_counter < 100) telemetry_packet.rssi = 90;
+    if (telemetry_counter > 100)                           telemetry_packet.rssi = 100;
+    
+    telemetry_counter = 0;
+    packet_state = 0;
   }
 }
 
@@ -284,13 +296,13 @@ bool low_batt_detect = 0, previous_state_batt, batt_led_state = 1, RF_led_state;
 
 void battery_check()
 {
-  if (millis() - adc_time > 1000) //delay adc reading RX battery
+  if (millis() - adc_time > 1000) //delay adc reading battery
   {
     adc_time = millis();
     
-    telemetry_packet.batt_A1 = analogRead(PIN_BATTERY) * (BATTERY_VOLTAGE / 1023);
+    telemetry_packet.batt_A1 = map(analogRead(PIN_BATTERY), 0, 1023, 0, 255);
     
-    low_batt_detect = telemetry_packet.batt_A1 <= MONITORED_VOLTAGE;
+    low_batt_detect = telemetry_packet.batt_A1 <= (255 / BATTERY_VOLTAGE) * MONITORED_VOLTAGE;
   }
   
   digitalWrite(PIN_LED, batt_led_state);
