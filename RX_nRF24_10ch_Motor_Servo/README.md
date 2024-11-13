@@ -6,7 +6,11 @@ The option to adjust the brake is included in the code.
 The firmware will be used for cars, boats, tanks, robots and aircraft.
 The code is Arduino.
 
-Works with RC transmitters [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev) or [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
+**Works with RC transmitters:**
+* [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
+* [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
+* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
+* [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
 ## Function
 * MotorA = adjustable pwm/ch1
