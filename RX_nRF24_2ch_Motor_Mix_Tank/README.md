@@ -6,7 +6,11 @@ The option to adjust the brake is included in the code.
 The firmware will be used for boats, tanks and robots.
 The code is Arduino.
 
-Works with RC transmitters [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED) or [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED) from my fork.
+**Works with RC transmitters:**
+* [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
+* [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
+* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
+* [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
 ## Function
 * MotorA = adjustable pwm/ch1 - mix tank-arcade
