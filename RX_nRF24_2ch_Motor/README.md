@@ -1,4 +1,4 @@
-# RC 2ch receiver (motor driver, telemetry, lap reader transponder)
+# RC 2channel receiver (motor driver, telemetry, lap reader transponder)
 Includes nRF24L01+ transceiver and ATmega328P processor.
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
