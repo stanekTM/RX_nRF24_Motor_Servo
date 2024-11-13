@@ -1,14 +1,22 @@
 
-//*********************************************************************************************************************
-//Communication nRF24L01P. Fixed RF channel, fixed address.
-//Support transmitter with OLED screen and telemetry https://github.com/stanekTM/TX_nRF24_2ch_OLED
-//and transmitter with LED indication and telemetry https://github.com/stanekTM/TX_nRF24_5ch_LED
-//*********************************************************************************************************************
+//*********************************************************************************************************************************
+// RC receiver 2ch (mix tank-arcade motor driver, telemetry)
+//***********************************************************
+// Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor_Mix_Tank
+//
+// The firmware will be used for boats, tanks, and robots. The code is Arduino.
+//
+// Works with RC transmitters:
+// TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
+// TX_nRF24_5ch_LED           https://github.com/stanekTM/TX_nRF24_5ch_LED
+// OpenAVRc                   https://github.com/Ingwie/OpenAVRc_Dev
+// Multiprotocol from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
+//*********************************************************************************************************************************
 
-#include <RF24.h>         //https://github.com/nRF24/RF24
-//#include <printf.h>       //print the radio debug info
-#include <DigitalIO.h>    //https://github.com/greiman/DigitalIO
-#include "PWMFrequency.h" //used locally https://github.com/TheDIYGuy999/PWMFrequency
+#include <RF24.h>         // https://github.com/nRF24/RF24
+//#include <printf.h>       // print the radio debug info
+#include <DigitalIO.h>    // https://github.com/greiman/DigitalIO
+#include "PWMFrequency.h" // used locally https://github.com/TheDIYGuy999/PWMFrequency
 
 
 //setting RF channels address (5 bytes number or character)

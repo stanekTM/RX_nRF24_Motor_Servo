@@ -1,14 +1,22 @@
 
-//*********************************************************************************************************************
-//Communication nRF24L01P "Stanek". Fixed RF channel, fixed address.
-//Support for OpenAVRc transmitter https://github.com/Ingwie/OpenAVRc_Dev
-//and for the Multiprotocol TX modul https://github.com/stanekTM/TX_FW_Multi_Stanek
-//*********************************************************************************************************************
+//*************************************************************************************************************************
+// RC receiver 12ch (servo driver, telemetry)
+//********************************************
+// Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_12ch_Servo
+//
+// The firmware will be used for cars, boats, tanks, robots and aircraft. The code is Arduino.
+//
+// Works with RC transmitters:
+// TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
+// TX_nRF24_5ch_LED           https://github.com/stanekTM/TX_nRF24_5ch_LED
+// OpenAVRc                   https://github.com/Ingwie/OpenAVRc_Dev
+// Multiprotocol from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
+//*************************************************************************************************************************
 
-#include <RF24.h>         //https://github.com/nRF24/RF24
-//#include <printf.h>       //print the radio debug info
-#include <DigitalIO.h>    //https://github.com/greiman/DigitalIO
-#include <Servo.h>        //Arduino standard library
+#include <RF24.h>         // https://github.com/nRF24/RF24
+//#include <printf.h>       // print the radio debug info
+#include <DigitalIO.h>    // https://github.com/greiman/DigitalIO
+#include <Servo.h>        // Arduino standard library
 
 
 //setting RF channels address (5 bytes number or character)
