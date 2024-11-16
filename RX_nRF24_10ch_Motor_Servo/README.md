@@ -5,7 +5,7 @@ The option to adjust the brake is included in the code.
 
 ### Receiver specification:
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
-* Working current motor driver: 1.5A (peak current up to 2.5A)
+* Working current of the motor driver (MX1508): 1.5A (peak current up to 2.5A)
 
 The firmware will be used for cars, boats, tanks, robots and aircraft.
 The code is Arduino.
