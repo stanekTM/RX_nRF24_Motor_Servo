@@ -7,7 +7,7 @@ The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and other
 The option to adjust the brake is included in the code.
 
 ### Receiver specification:
-* Operating Voltage:            3.3V - 6.0V (target typically 4.2V, 1S LiPo)
+* Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 * Working current motor driver: 1.5A (peak current up to 2.5A)
 
 The firmware will be used for cars, boats, tanks, robots and aircraft.
