@@ -1,10 +1,13 @@
 # RC receiver 12ch (servo driver, telemetry)
 Includes nRF24L01+ transceiver and ATmega328P processor.
 
+### Receiver specification
+* Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
+
 The firmware will be used for cars, boats, tanks, robots and aircraft.
 The code is Arduino.
 
-**Works with RC transmitters:**
+### Works with RC transmitters:
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
