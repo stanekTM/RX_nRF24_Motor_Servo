@@ -4,7 +4,7 @@ The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and other
 The option to adjust the brake is included in the code.
 The PCB also includes a CMT2150A transponder for a custom RF lap reader.
 
-#### Receiver specification:
+### Receiver specification:
 
 Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 Working current: 1.5A (peak current up to 2.5A)
