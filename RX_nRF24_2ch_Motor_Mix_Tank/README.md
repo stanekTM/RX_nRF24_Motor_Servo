@@ -3,10 +3,14 @@ Includes nRF24L01+ transceiver and ATmega328P processor.
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
 
+### Receiver specification:
+* Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
+* Working current motor driver: 1.5A (peak current up to 2.5A)
+
 The firmware will be used for boats, tanks and robots.
 The code is Arduino.
 
-**Works with RC transmitters:**
+### Works with RC transmitters:
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
