@@ -193,6 +193,7 @@ void setup()
   //Serial.begin(9600); //print value on a serial monitor
   //printf_begin();     //print the radio debug info
   
+  
   pinMode(PIN_PWM_1_MOTOR_A, OUTPUT);
   pinMode(PIN_PWM_2_MOTOR_A, OUTPUT);
   pinMode(PIN_PWM_3_MOTOR_B, OUTPUT);
@@ -225,12 +226,12 @@ void setup()
 //*********************************************************************************************************************
 void loop()
 {
+  //radio.printDetails();       //(smaller) print raw register values
+  //radio.printPrettyDetails(); //(larger) print human readable data
+  
   output_PWM();
   fail_safe_time();
   send_and_receive_data();
-  
-  //Serial.println("Radio details *****************");
-  //radio.printDetails(); //print the radio debug info
 }
 
 //*********************************************************************************************************************
@@ -251,7 +252,8 @@ void fail_safe_time()
 //send and receive data ***********************************************************************************************
 //*********************************************************************************************************************
 byte telemetry_counter = 0;
-unsigned int packet_state;
+unsigned int state_counter = 0;
+byte rssi_value = 0;
 
 void send_and_receive_data()
 {
@@ -260,14 +262,25 @@ void send_and_receive_data()
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
     radio.read(&rc_packet, sizeof(rc_packet_size));
-
+    
     telemetry_counter++;
     
     battery_check();
     fs_time = millis();
   }
   
-  if (packet_state++ > 8130)
+  /*
+  if (state_counter++ > 28500)
+  {
+    telemetry_packet.rssi = telemetry_counter;
+    //value_rssi = telemetry_counter;
+    telemetry_counter = 0;
+    state_counter = 0;
+  }
+  //telemetry_packet.rssi = map(value_rssi, 0, 100, 0, 255);
+  */
+  
+  if (state_counter++ > 28500)
   {
     if (telemetry_counter < 10)                            telemetry_packet.rssi = 0;
     if (telemetry_counter > 10 && telemetry_counter < 30)  telemetry_packet.rssi = 10;
@@ -277,8 +290,9 @@ void send_and_receive_data()
     if (telemetry_counter > 100)                           telemetry_packet.rssi = 100;
     
     telemetry_counter = 0;
-    packet_state = 0;
+    state_counter = 0;
   }
+  
 }
 
 //*********************************************************************************************************************
