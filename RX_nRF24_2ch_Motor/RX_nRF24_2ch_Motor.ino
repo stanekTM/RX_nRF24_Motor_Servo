@@ -20,7 +20,7 @@
 #include "PWMFrequency.h" // used locally https://github.com/TheDIYGuy999/PWMFrequency
 
 
-//setting RF channels address (5 bytes number or character)
+//setting a unique address (5 bytes number or character)
 const byte address[] = "jirka";
 
 //RF communication channel settings (0-125, 2.4Ghz + 76 = 2.476Ghz)
@@ -292,7 +292,6 @@ void send_and_receive_data()
     telemetry_counter = 0;
     state_counter = 0;
   }
-  
 }
 
 //*********************************************************************************************************************

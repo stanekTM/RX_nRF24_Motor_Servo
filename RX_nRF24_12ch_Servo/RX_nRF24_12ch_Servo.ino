@@ -20,7 +20,7 @@
 #include <Servo.h>        // Arduino standard library
 
 
-//setting RF channels address (5 bytes number or character)
+//setting a unique address (5 bytes number or character)
 const byte address[] = "jirka";
 
 //RF communication channel settings (0-125, 2.4Ghz + 76 = 2.476Ghz)
@@ -196,12 +196,12 @@ void setup()
 //*********************************************************************************************************************
 void loop()
 {
+  //radio.printDetails();       //(smaller) print raw register values
+  //radio.printPrettyDetails(); //(larger) print human readable data
+  
   output_servo();
   fail_safe_time();
   send_and_receive_data();
-  
-  //Serial.println("Radio details *****************");
-  //radio.printDetails(); //print the radio debug info
 }
 
 //*********************************************************************************************************************
@@ -222,34 +222,34 @@ void fail_safe_time()
 //send and receive data ***********************************************************************************************
 //*********************************************************************************************************************
 byte telemetry_counter = 0;
-unsigned int packet_state;
-unsigned int val_packet_state;
+unsigned int state_counter = 0;
+unsigned int val_state_counter;
 
 void send_and_receive_data()
 {
   switch (sizeof(rc_packet_size))
   {
-    case 4:  val_packet_state = 8130; //2ch
+    case 4:  val_state_counter = 8130; //2ch
     break;
-    case 6:  val_packet_state = 7360; //3ch
+    case 6:  val_state_counter = 7360; //3ch
     break;
-    case 8:  val_packet_state = 6720; //4ch
+    case 8:  val_state_counter = 6720; //4ch
     break;
-    case 10: val_packet_state = 6180; //5ch
+    case 10: val_state_counter = 6180; //5ch
     break;
-    case 12: val_packet_state = 5200; //6ch
+    case 12: val_state_counter = 5200; //6ch
     break;
-    case 14: val_packet_state = 4970; //7ch
+    case 14: val_state_counter = 4970; //7ch
     break;
-    case 16: val_packet_state = 4780; //8ch
+    case 16: val_state_counter = 4780; //8ch
     break;
-    case 18: val_packet_state = 4610; //9ch
+    case 18: val_state_counter = 4610; //9ch
     break;
-    case 20: val_packet_state = 4080; //10ch
+    case 20: val_state_counter = 4080; //10ch
     break;
-    case 22: val_packet_state = 3960; //11ch
+    case 22: val_state_counter = 3960; //11ch
     break;
-    case 24: val_packet_state = 3510; //12ch
+    case 24: val_state_counter = 3510; //12ch
     break;
   }
   
@@ -265,7 +265,7 @@ void send_and_receive_data()
     fs_time = millis();
   }
   
-  if (packet_state++ > val_packet_state)
+  if (state_counter++ > val_state_counter)
   {
     if (telemetry_counter < 10)                            telemetry_packet.rssi = 0;
     if (telemetry_counter > 10 && telemetry_counter < 30)  telemetry_packet.rssi = 10;
@@ -275,7 +275,7 @@ void send_and_receive_data()
     if (telemetry_counter > 100)                           telemetry_packet.rssi = 100;
     
     telemetry_counter = 0;
-    packet_state = 0;
+    state_counter = 0;
   }
 }
 
