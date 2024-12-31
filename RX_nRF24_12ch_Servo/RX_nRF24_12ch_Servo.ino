@@ -221,35 +221,35 @@ void fail_safe_time()
 //*********************************************************************************************************************
 //send and receive data ***********************************************************************************************
 //*********************************************************************************************************************
-byte telemetry_counter = 0;
-unsigned int state_counter = 0;
-unsigned int val_state_counter;
+byte packet_counter = 0;
+unsigned long packet_time = 0;
+unsigned int val_packet_time;
 
 void send_and_receive_data()
 {
   switch (sizeof(rc_packet_size))
   {
-    case 4:  val_state_counter = 8130; //2ch
+    case 4:  val_packet_time = 200;  //2ch
     break;
-    case 6:  val_state_counter = 7360; //3ch
+    case 6:  val_packet_time = 300;  //3ch
     break;
-    case 8:  val_state_counter = 6720; //4ch
+    case 8:  val_packet_time = 400;  //4ch
     break;
-    case 10: val_state_counter = 6180; //5ch
+    case 10: val_packet_time = 500;  //5ch
     break;
-    case 12: val_state_counter = 5200; //6ch
+    case 12: val_packet_time = 600;  //6ch
     break;
-    case 14: val_state_counter = 4970; //7ch
+    case 14: val_packet_time = 700;  //7ch
     break;
-    case 16: val_state_counter = 4780; //8ch
+    case 16: val_packet_time = 800;  //8ch
     break;
-    case 18: val_state_counter = 4610; //9ch
+    case 18: val_packet_time = 900;  //9ch
     break;
-    case 20: val_state_counter = 4080; //10ch
+    case 20: val_packet_time = 1000; //10ch
     break;
-    case 22: val_state_counter = 3960; //11ch
+    case 22: val_packet_time = 1100; //11ch
     break;
-    case 24: val_state_counter = 3510; //12ch
+    case 24: val_packet_time = 1200; //12ch
     break;
   }
   
@@ -259,23 +259,19 @@ void send_and_receive_data()
     
     radio.read(&rc_packet, sizeof(rc_packet_size));
     
-    telemetry_counter++;
+    packet_counter++;
     
     battery_check();
     fs_time = millis();
   }
   
-  if (state_counter++ > val_state_counter)
+  if (millis() - packet_time > val_packet_time)
   {
-    if (telemetry_counter < 10)                            telemetry_packet.rssi = 0;
-    if (telemetry_counter > 10 && telemetry_counter < 30)  telemetry_packet.rssi = 10;
-    if (telemetry_counter > 30 && telemetry_counter < 60)  telemetry_packet.rssi = 50;
-    if (telemetry_counter > 60 && telemetry_counter < 80)  telemetry_packet.rssi = 70;
-    if (telemetry_counter > 80 && telemetry_counter < 100) telemetry_packet.rssi = 90;
-    if (telemetry_counter > 100)                           telemetry_packet.rssi = 100;
-    
-    telemetry_counter = 0;
-    state_counter = 0;
+    packet_time = millis();
+    //telemetry_packet.rssi = packet_counter;
+    telemetry_packet.rssi = map(packet_counter, 0, 10, 0, 100);
+    //telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
+    packet_counter = 0;
   }
 }
 

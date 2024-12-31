@@ -305,9 +305,8 @@ void fail_safe_time()
 //*********************************************************************************************************************
 //send and receive data ***********************************************************************************************
 //*********************************************************************************************************************
-byte telemetry_counter = 0;
-unsigned int state_counter = 0;
-byte rssi_value = 0;
+byte packet_counter = 0;
+unsigned long packet_time = 0;
 
 void send_and_receive_data()
 {
@@ -316,35 +315,20 @@ void send_and_receive_data()
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
     radio.read(&rc_packet, sizeof(rc_packet_size));
-
-    telemetry_counter++;
+    
+    packet_counter++;
     
     battery_check();
     fs_time = millis();
   }
   
-  /*
-  if (state_counter++ > 28500)
+  if (millis() - packet_time > 1000)
   {
-    telemetry_packet.rssi = telemetry_counter;
-    //value_rssi = telemetry_counter;
-    telemetry_counter = 0;
-    state_counter = 0;
-  }
-  //telemetry_packet.rssi = map(value_rssi, 0, 100, 0, 255);
-  */
-  
-  if (state_counter++ > 28500)
-  {
-    if (telemetry_counter < 10)                            telemetry_packet.rssi = 0;
-    if (telemetry_counter > 10 && telemetry_counter < 30)  telemetry_packet.rssi = 10;
-    if (telemetry_counter > 30 && telemetry_counter < 60)  telemetry_packet.rssi = 50;
-    if (telemetry_counter > 60 && telemetry_counter < 80)  telemetry_packet.rssi = 70;
-    if (telemetry_counter > 80 && telemetry_counter < 100) telemetry_packet.rssi = 90;
-    if (telemetry_counter > 100)                           telemetry_packet.rssi = 100;
-    
-    telemetry_counter = 0;
-    state_counter = 0;
+    packet_time = millis();
+    //telemetry_packet.rssi = packet_counter;
+    telemetry_packet.rssi = map(packet_counter, 0, 10, 0, 100);
+    //telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
+    packet_counter = 0;
   }
 }
 
