@@ -68,6 +68,7 @@ const byte address[] = "jirka";
 //free pins
 //pin                      0
 //pin                      1
+//pin                      2
 //pin                      4
 //pin                      5
 //pin                      6
@@ -75,7 +76,6 @@ const byte address[] = "jirka";
 //pin                      8
 //pin                      12 //MISO
 //pin                      13 //SCK
-//pin                      A5
 //pin                      A6
  
 //pwm pins for motor
@@ -85,7 +85,7 @@ const byte address[] = "jirka";
 #define PIN_PWM_4_MOTOR_B  11 //MOSI
 
 //LED battery and RF on/off
-#define PIN_LED            2
+#define PIN_LED            A5
 
 //input battery
 #define PIN_BATTERY        A7
@@ -119,7 +119,7 @@ struct telemetry_packet_size
 {
   byte rssi;
   byte batt_A1;
-  byte batt_A2; //not used yet
+  byte batt_A2;
 };
 telemetry_packet_size telemetry_packet;
 

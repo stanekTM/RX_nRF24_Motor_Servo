@@ -99,7 +99,7 @@ struct telemetry_packet_size
 {
   byte rssi;
   byte batt_A1;
-  byte batt_A2; //not used yet
+  byte batt_A2;
 };
 telemetry_packet_size telemetry_packet;
 
