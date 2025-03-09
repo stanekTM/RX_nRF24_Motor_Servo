@@ -15,95 +15,96 @@
 //*********************************************************************************************************************************
 
 #include <RF24.h>         // https://github.com/nRF24/RF24
-//#include <printf.h>       // print the radio debug info
+//#include <printf.h>       // Print the radio debug info
 #include <DigitalIO.h>    // https://github.com/greiman/DigitalIO
-#include "PWMFrequency.h" // used locally https://github.com/TheDIYGuy999/PWMFrequency
+#include "PWMFrequency.h" // Used locally https://github.com/TheDIYGuy999/PWMFrequency
 
 
-//setting a unique address (5 bytes number or character)
+// Setting a unique address (5 bytes number or character)
 const byte address[] = "jirka";
 
-//RF communication channel settings (0-125, 2.4Ghz + 76 = 2.476Ghz)
+// RF communication channel settings (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RADIO_CHANNEL  76
 
-//setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
+// Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR_A  0
 #define ACCELERATE_MOTOR_B  0
 
-//setting the maximum motor power in individual modes. Suitable, for example, when the motors
-//powers are not the same and it is necessary to achieve straight driving. Settings (0-255)
+// Setting the maximum motor power in individual modes. Suitable, for example, when the motors
+// powers are not the same and it is necessary to achieve straight driving. Settings (0-255)
 #define MAX_FORW_MOTOR_A  255
-#define MAX_FORW_MOTOR_B  255
 #define MAX_BACK_MOTOR_A  255
+
+#define MAX_FORW_MOTOR_B  255
 #define MAX_BACK_MOTOR_B  255
 
-//brake setting, no brake 0, max brake 255. Settings (0-255)
+// Brake setting, no brake 0, max brake 255. Settings (0-255)
 #define BRAKE_MOTOR_A  255
 #define BRAKE_MOTOR_B  255
 
-//LED alarm battery voltage setting
+// Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2
 #define MONITORED_VOLTAGE  3.35
 
-//setting the dead zone of poor quality joysticks TX for the motor controller
+// Setting the dead zone of poor quality joysticks TX for the motor controller
 #define DEAD_ZONE  15
 
-//setting the control range value
+// Setting the control range value
 #define MIN_CONTROL_VAL  1000
 #define MID_CONTROL_VAL  1500
 #define MAX_CONTROL_VAL  2000
 
-//settings PWM (pin D5 or D6 are paired on timer0/8-bit, functions delay, millis, micros and delayMicroseconds)
-//1024 = 61Hz, 256 = 244Hz, 64 = 976Hz(default), 8 = 7812Hz
+// Settings PWM (pin D5 or D6 are paired on timer0/8-bit, functions delay, millis, micros and delayMicroseconds)
+// 1024 = 61Hz, 256 = 244Hz, 64 = 976Hz(default), 8 = 7812Hz
 //#define PWM_MOTOR_A  64
 
-//settings PWM (pin D9 or D10 are paired on timer1/16-bit, Servo library)
-//1024 = 30Hz, 256 = 122Hz, 64 = 488Hz(default), 8 = 3906Hz
+// Settings PWM (pin D9 or D10 are paired on timer1/16-bit, Servo library)
+// 1024 = 30Hz, 256 = 122Hz, 64 = 488Hz(default), 8 = 3906Hz
 #define PWM_MOTOR_A  256
 
-//settings PWM (pin D3 or D11 are paired on timer2/8-bit, ServoTimer2 library)
-//1024 = 30Hz, 256 = 122Hz, 128 = 244Hz, 64 = 488Hz(default), 32 = 976Hz, 8 = 3906Hz
+// Settings PWM (pin D3 or D11 are paired on timer2/8-bit, ServoTimer2 library)
+// 1024 = 30Hz, 256 = 122Hz, 128 = 244Hz, 64 = 488Hz(default), 32 = 976Hz, 8 = 3906Hz
 #define PWM_MOTOR_B  256
 
-//free pins
-//pin                      0
-//pin                      1
-//pin                      2
-//pin                      4
-//pin                      5
-//pin                      6
-//pin                      7
-//pin                      8
-//pin                      12 //MISO
-//pin                      13 //SCK
-//pin                      A6
+// Free pins
+// Pin                     0
+// Pin                     1
+// Pin                     2
+// Pin                     4
+// Pin                     5
+// Pin                     6
+// Pin                     7
+// Pin                     8
+// Pin                     12 // MISO
+// Pin                     13 // SCK
+// Pin                     A6
  
-//pwm pins for motor
+// PWM pins for motor
 #define PIN_PWM_1_MOTOR_A  9
 #define PIN_PWM_2_MOTOR_A  10
 #define PIN_PWM_3_MOTOR_B  3
-#define PIN_PWM_4_MOTOR_B  11 //MOSI
+#define PIN_PWM_4_MOTOR_B  11 // MOSI
 
-//LED battery and RF on/off
+// LED alarm
 #define PIN_LED            A5
 
-//input battery
+// Input battery
 #define PIN_BATTERY        A7
 
-//pins for nRF24L01
+// Pins for nRF24L01
 #define PIN_CE             A0
 #define PIN_CSN            A1
 
-//software SPI https://nrf24.github.io/RF24/md_docs_arduino.html
+// Software SPI https://nrf24.github.io/RF24/md_docs_arduino.html
 //----- SCK           16 - A2
 //----- MOSI          17 - A3
 //----- MISO          18 - A4
 
-//setting of CE and CSN pins
+// Setting of CE and CSN pins
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-//this structure defines the received data in bytes (structure size max. 32 bytes) ************************************
+// This structure defines the data sent (max 32 bytes)
 //*********************************************************************************************************************
 struct rc_packet_size
 {
@@ -113,18 +114,18 @@ struct rc_packet_size
 rc_packet_size rc_packet;
 
 //*********************************************************************************************************************
-//this struct defines data, which are embedded inside the ACK payload *************************************************
+// This structure defines the received ACK payload data
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
-  byte rssi;
+  byte rssi;    // Max 170 OpenTx!
   byte batt_A1;
-  byte batt_A2;
+  byte batt_A2; // Not used yet
 };
 telemetry_packet_size telemetry_packet;
 
 //*********************************************************************************************************************
-//fail safe, settings 1000-2000 (MIN_CONTROL_VAL = 1000, MID_CONTROL_VAL = 1500, MAX_CONTROL_VAL = 2000) **************
+// Fail-safe, settings 1000-2000 (MIN_CONTROL_VAL = 1000, MID_CONTROL_VAL = 1500, MAX_CONTROL_VAL = 2000)
 //*********************************************************************************************************************
 void fail_safe()
 {
@@ -133,23 +134,23 @@ void fail_safe()
 }
 
 //*********************************************************************************************************************
-//setup frequencies and motors control ********************************************************************************
+// Motor control
 //*********************************************************************************************************************
 int value_motorA = 0, value_motorB = 0;
 int ch1 = 0, ch2 = 0;
 int mix1 = 0, mix2 = 0;
 int calc_mix = 258;
 
-void output_PWM()
+void motor_control()
 {
+  // mix tank-arcade
   ch1 = rc_packet.ch_motorA / 2;
   ch2 = rc_packet.ch_motorB / 2;
   mix1 = ch1 - ch2 + 1500;
   mix2 = ch1 + ch2;
-  
   //Serial.println(mix1);
   
-  //forward motorA
+  // Forward motor A
   if (mix1 > MID_CONTROL_VAL + DEAD_ZONE)
   {
     value_motorA = map(mix1, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
@@ -158,7 +159,7 @@ void output_PWM()
     digitalWrite(PIN_PWM_1_MOTOR_A, LOW);
     //Serial.println(value_motorA);
   }
-  //back motorA
+  // Back motor A
   else if (mix1 < MID_CONTROL_VAL - DEAD_ZONE)
   {
     value_motorA = map(mix1, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
@@ -174,7 +175,7 @@ void output_PWM()
   }
   //Serial.println(value_motorA);
   
-  //forward motorB
+  // Forward motor B
   if (mix2 > MID_CONTROL_VAL + DEAD_ZONE)
   {
     value_motorB = map(mix2, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
@@ -183,7 +184,7 @@ void output_PWM()
     digitalWrite(PIN_PWM_3_MOTOR_B, LOW);
     //Serial.println(value_motorB);
   }
-  //back motorB
+  // Back motor B
   else if (mix2 < MID_CONTROL_VAL - DEAD_ZONE)
   {
     value_motorB = map(mix2, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
@@ -201,12 +202,12 @@ void output_PWM()
 }
 
 //*********************************************************************************************************************
-//initial main settings ***********************************************************************************************
+// Program setup
 //*********************************************************************************************************************
 void setup()
 {
-  //Serial.begin(9600); //print value ​​on a serial monitor
-  //printf_begin();     //print the radio debug info
+  //Serial.begin(9600);
+  //printf_begin(); // Print the radio debug info
   
   pinMode(PIN_PWM_1_MOTOR_A, OUTPUT);
   pinMode(PIN_PWM_2_MOTOR_A, OUTPUT);
@@ -218,11 +219,11 @@ void setup()
   
   fail_safe();
   
-  //frequency setting
+  // Setting the motor frequency
   setPWMPrescaler(PIN_PWM_1_MOTOR_A, PWM_MOTOR_A);
   setPWMPrescaler(PIN_PWM_3_MOTOR_B, PWM_MOTOR_B);
   
-  //define the radio communication
+  // Define the radio communication
   radio.begin();
   radio.setAutoAck(true);
   radio.enableAckPayload();
@@ -230,41 +231,29 @@ void setup()
   radio.setRetries(5, 5);
   radio.setChannel(RADIO_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
-  radio.setPALevel(RF24_PA_MIN); //RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
+  radio.setPALevel(RF24_PA_MIN); // RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
   radio.openReadingPipe(1, address);
   radio.startListening();
 }
 
 //*********************************************************************************************************************
-//program loop ********************************************************************************************************
+// Program loop
 //*********************************************************************************************************************
 void loop()
 {
-  //radio.printDetails();       //(smaller) print raw register values
-  //radio.printPrettyDetails(); //(larger) print human readable data
+  //radio.printDetails();       // Smaller print raw register values
+  //radio.printPrettyDetails(); // Larger print human readable data
   
-  output_PWM();
-  fail_safe_time();
+  motor_control();
   send_and_receive_data();
+  batt_monitoring();
+  LED_mode();
 }
 
 //*********************************************************************************************************************
-//get time after losing RF data or turning off the TX, reset data and the LED flashing ********************************
+// Send and receive data
 //*********************************************************************************************************************
-unsigned long fs_time = 0;
-
-void fail_safe_time()
-{
-  if (millis() - fs_time > 1000) //after 1 second
-  {
-    fail_safe();
-    RF_off_check();
-  }
-}
-
-//*********************************************************************************************************************
-//send and receive data ***********************************************************************************************
-//*********************************************************************************************************************
+unsigned long rf_timeout = 0;
 byte packet_counter = 0;
 unsigned long packet_time = 0;
 
@@ -278,8 +267,7 @@ void send_and_receive_data()
     
     packet_counter++;
     
-    battery_check();
-    fs_time = millis();
+    rf_timeout = millis();
   }
   
   if (millis() - packet_time > 200)
@@ -293,54 +281,68 @@ void send_and_receive_data()
 }
 
 //*********************************************************************************************************************
-//reading adc battery. After receiving RF data, the monitored battery is activated. Battery OK = LED is lit ***********
-//When BATTERY_VOLTAGE < MONITORED_VOLTAGE = LED alarm flash at a interval of 0.5s ************************************
+// Battery voltage monitoring
 //*********************************************************************************************************************
-unsigned long adc_time = 0, led_time = 0;
-bool low_batt_detect = 0, previous_state_batt, batt_led_state = 1, RF_led_state;
+unsigned long adc_time = 0;
+bool low_batt = 0; 
+bool previous_state_batt;
 
-void battery_check()
+void batt_monitoring()
 {
-  if (millis() - adc_time > 1000) //delay adc reading battery
+  if (millis() - adc_time > 1000) // Delay ADC reading battery
   {
     adc_time = millis();
     
     telemetry_packet.batt_A1 = map(analogRead(PIN_BATTERY), 0, 1023, 0, 255);
     
-    low_batt_detect = telemetry_packet.batt_A1 <= (255 / BATTERY_VOLTAGE) * MONITORED_VOLTAGE;
+    low_batt = telemetry_packet.batt_A1 <= (255 / BATTERY_VOLTAGE) * MONITORED_VOLTAGE;
   }
   
-  digitalWrite(PIN_LED, batt_led_state);
-  
-  if (low_batt_detect)
+  // Battery alarm lock
+  if (low_batt)
   {
     previous_state_batt = 1;
-    
-    if (millis() - led_time > 500)
-    {
-      led_time = millis();
-      
-      batt_led_state = !batt_led_state;
-    }
   }
-  low_batt_detect = previous_state_batt;
+  low_batt = previous_state_batt;
   
-  //Serial.println(low_batt_detect);
+  //Serial.println(low_batt);
 }
 
 //*********************************************************************************************************************
-//when RX is switched on and TX is switched off, or after the loss of RF data = LED flash at a interval of 0.1s *******
-//Normal mode = LED is lit ********************************************************************************************
+// LED blink mode and timeout for fail-safe
 //*********************************************************************************************************************
-void RF_off_check()
+void LED_mode()
 {
-  digitalWrite(PIN_LED, RF_led_state);
-  
-  if (millis() - led_time > 100)
+  if (millis() - rf_timeout > 1000) // If we lose RF data for 1 second, the LED blink at 0.1s interval
+  {
+    fail_safe();
+    blink(PIN_LED, 100);
+  }
+  else if (low_batt) // If the battery is low, the LED blink at 0.3s interval
+  {
+    blink(PIN_LED, 300);
+  }
+  else
+  {
+    digitalWrite(PIN_LED, HIGH); // Normal mode, LED is lit
+  }
+}
+
+//*********************************************************************************************************************
+// LED blink function
+//*********************************************************************************************************************
+unsigned long led_time = 0;
+bool led_state;
+
+void blink(uint8_t pin, uint16_t interval)
+{
+  if (millis() - led_time > interval)
   {
     led_time = millis();
     
-    RF_led_state = !RF_led_state;
+    led_state = !led_state;
+    
+    digitalWrite(pin, led_state);
   }
 }
  
