@@ -118,7 +118,7 @@ rc_packet_size rc_packet;
 struct telemetry_packet_size
 {
   byte rssi;    // Max 170 OpenTx!
-  byte batt_A1;
+  byte batt_A1 = 255;
   byte batt_A2; // Not used yet
 };
 telemetry_packet_size telemetry_packet;
@@ -246,9 +246,9 @@ void send_and_receive_data()
 {
   if (radio.available())
   {
-    radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
-    
     radio.read(&rc_packet, sizeof(rc_packet_size));
+    
+    radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
     packet_counter++;
     
@@ -301,6 +301,7 @@ void LED_mode()
   if (millis() - rf_timeout > 1000) // If we lose RF data for 1 second, the LED blink at 0.1s interval
   {
     fail_safe();
+
     blink(PIN_LED, 100);
   }
   else if (low_batt) // If the battery is low, the LED blink at 0.3s interval
