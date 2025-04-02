@@ -22,7 +22,7 @@ The code is Arduino.
 * Normal mode, LED is lit
 * If the RX battery is low, the LED blink at 0.3s interval
 * If we lose RF data for 1 second, the LED blink at 0.1s interval
-* Fail-safe - motor A and B stop, servos ch3 -> ch10 set to neutral or individually set in code
+* Fail-safe - motor A and B stop, servos 1 -> 8 set to neutral or individually set in code
 
 ## Arduino pins
 ```
