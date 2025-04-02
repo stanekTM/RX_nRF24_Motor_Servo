@@ -17,13 +17,12 @@ The code is Arduino.
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
 ## Function
-* MotorA adjustable pwm/ch1 - mix tank-arcade
-* MotorB adjustable pwm/ch2 - mix tank-arcade
+* Adjustable PWM of motor A and B
 * Brake on, off or adjustable effect
 * Normal mode, LED is lit
 * If the RX battery is low, the LED blink at 0.3s interval
 * If we lose RF data for 1 second, the LED blink at 0.1s interval
-* Fail-safe MotorA and MotorB stopped
+* Fail-safe - motor A and B stop
 
 ## Arduino pins
 ```
