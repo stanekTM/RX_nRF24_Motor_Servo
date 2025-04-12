@@ -117,7 +117,7 @@ rc_packet_size rc_packet;
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
-  byte rssi;    // Max 170 OpenTx!
+  byte rssi;
   byte batt_A1 = 255;
   byte batt_A2; // Not used yet
 };
@@ -210,10 +210,10 @@ void setup()
   
   // Define the radio communication
   radio.begin();
-  radio.setAutoAck(true);
+  radio.setAutoAck(1);
   radio.enableAckPayload();
   radio.enableDynamicPayloads();
-  radio.setRetries(5, 5);
+  radio.setRetries(0, 0);
   radio.setChannel(RADIO_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_MIN); // RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
@@ -238,8 +238,8 @@ void loop()
 //*********************************************************************************************************************
 // Send and receive data
 //*********************************************************************************************************************
-unsigned long rf_timeout = 0;
 byte packet_counter = 0;
+unsigned long rf_timeout = 0;
 unsigned long packet_time = 0;
 
 void send_and_receive_data()
@@ -258,9 +258,9 @@ void send_and_receive_data()
   if (millis() - packet_time > 1000)
   {
     packet_time = millis();
-    telemetry_packet.rssi = packet_counter * 5.43;
-    //telemetry_packet.rssi = map(packet_counter * 2, 0, 48, 0, 100);
-    //telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
+    
+    telemetry_packet.rssi = packet_counter;
+    
     packet_counter = 0;
   }
 }

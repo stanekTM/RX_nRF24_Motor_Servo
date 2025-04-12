@@ -97,7 +97,7 @@ rc_packet_size rc_packet;
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
-  byte rssi;    // Max 170 OpenTx!
+  byte rssi;
   byte batt_A1 = 255;
   byte batt_A2; // Not used yet
 };
@@ -180,10 +180,10 @@ void setup()
   
   // Define the radio communication
   radio.begin();
-  radio.setAutoAck(true);
+  radio.setAutoAck(1);
   radio.enableAckPayload();
   radio.enableDynamicPayloads();
-  radio.setRetries(5, 5);
+  radio.setRetries(0, 0);
   radio.setChannel(RADIO_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_MIN); // RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
@@ -208,43 +208,16 @@ void loop()
 //*********************************************************************************************************************
 // Send and receive data
 //*********************************************************************************************************************
-unsigned int val_packet_time;
 byte packet_counter = 0;
 unsigned long rf_timeout = 0;
 unsigned long packet_time = 0;
 
 void send_and_receive_data()
 {
-  switch (sizeof(rc_packet_size))
-  {
-    case 4:  val_packet_time = 200;  //2ch
-    break;
-    case 6:  val_packet_time = 300;  //3ch
-    break;
-    case 8:  val_packet_time = 400;  //4ch
-    break;
-    case 10: val_packet_time = 500;  //5ch
-    break;
-    case 12: val_packet_time = 600;  //6ch
-    break;
-    case 14: val_packet_time = 700;  //7ch
-    break;
-    case 16: val_packet_time = 800;  //8ch
-    break;
-    case 18: val_packet_time = 900;  //9ch
-    break;
-    case 20: val_packet_time = 1000; //10ch
-    break;
-    case 22: val_packet_time = 1100; //11ch
-    break;
-    case 24: val_packet_time = 1200; //12ch
-    break;
-  }
-  
   if (radio.available())
   {
     radio.read(&rc_packet, sizeof(rc_packet_size));
-
+    
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
     packet_counter++;
@@ -252,12 +225,12 @@ void send_and_receive_data()
     rf_timeout = millis();
   }
   
-  if (millis() - packet_time > val_packet_time)
+  if (millis() - packet_time > 1000)
   {
     packet_time = millis();
-    //telemetry_packet.rssi = packet_counter;
-    telemetry_packet.rssi = map(packet_counter, 0, 10, 0, 100);
-    //telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
+    
+    telemetry_packet.rssi = packet_counter;
+    
     packet_counter = 0;
   }
 }
