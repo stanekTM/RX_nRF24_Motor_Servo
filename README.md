@@ -1,5 +1,4 @@
 # RC receiver (motor-servo driver, telemetry)
-RC receiver with fixed RF channel and fixed address.
 Telemetry sends measured voltage and "fake" RSSI (the nRF24L01+ transceiver does not contain real RSSI and is only a rough counting of lost packets).
 
 The hardware includes nRF24L01+ transceiver and ATmega328P processor.
