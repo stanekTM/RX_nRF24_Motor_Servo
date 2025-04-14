@@ -7,9 +7,6 @@ The option to adjust the brake is included in the code.
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 * Working current of the motor driver (MX1508): 1.5A (peak current up to 2.5A)
 
-The firmware will be used for boats, tanks and robots.
-The code is Arduino.
-
 ### Works with RC transmitters:
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
