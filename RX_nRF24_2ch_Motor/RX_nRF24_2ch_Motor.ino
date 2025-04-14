@@ -5,7 +5,6 @@
 // Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor
 //
 // Includes nRF24L01+ transceiver and ATmega328P processor.
-// The firmware will be used for cars, boats, tanks, and robots. The code is Arduino.
 //
 // Works with RC transmitters:
 // TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
