@@ -4,8 +4,6 @@
 //*******************************************
 // Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor
 //
-// Includes nRF24L01+ transceiver and ATmega328P processor.
-//
 // Works with RC transmitters:
 // TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
 // TX_nRF24_5ch_LED           https://github.com/stanekTM/TX_nRF24_5ch_LED
