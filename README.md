@@ -1,5 +1,6 @@
 # RC receiver (motor-servo driver, telemetry)
 Includes nRF24L01+, ATmega328P processor, 2x motor driver with brake (e.g. mix tank-arcade) or servo outputs and telemetry.
+
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
 
