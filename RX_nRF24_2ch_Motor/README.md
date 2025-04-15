@@ -1,8 +1,10 @@
 # RC receiver 2ch (motor driver, telemetry, lap reader transponder)
 Includes nRF24L01+ transceiver and ATmega328P processor.
+Includes nRF24L01+ transceiver, ATmega328P processor, 2x motor controller, lap transponder and telemetry.
+
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
-The PCB also includes a CMT2150A transponder for a custom RF lap reader.
+Includes a CMT2150A transponder for a custom RF lap reader.
 
 ### Receiver specification:
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
