@@ -1,5 +1,6 @@
 # RC receiver 12ch (servo driver, telemetry)
 Includes nRF24L01+ transceiver and ATmega328P processor.
+Includes nRF24L01+ transceiver, ATmega328P processor, servo outputs and telemetry.
 
 ### Receiver specification:
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
