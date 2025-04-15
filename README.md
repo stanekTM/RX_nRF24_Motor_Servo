@@ -6,7 +6,6 @@ The option to adjust the brake is included in the code.
 
 Telemetry sends measured voltage and "fake" RSSI (the nRF24L01+ transceiver does not contain real RSSI and is only a rough counting of lost packets).
 
-The firmware will be used for cars, boats, tanks, robots and aircraft.
 The code is Arduino.
 
 ### Receiver specification:
