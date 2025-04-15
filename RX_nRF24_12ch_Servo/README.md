@@ -1,5 +1,4 @@
 # RC receiver 12ch (servo driver, telemetry)
-Includes nRF24L01+ transceiver and ATmega328P processor.
 Includes nRF24L01+ transceiver, ATmega328P processor, servo outputs and telemetry.
 
 ### Receiver specification:
