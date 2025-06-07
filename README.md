@@ -1,4 +1,4 @@
-# RC receiver (motor-servo driver, telemetry)
+# RC receiver (motor driver, servo driver, telemetry)
 Includes nRF24L01+ transceiver, ATmega328P processor, 2x motor controller with brake (e.g. tank-arcade mix) or servo outputs and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
@@ -34,7 +34,7 @@ The code is Arduino.
 <img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_5.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_6.jpg" width="415">
 <img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_7.jpg" width="415">
 
-## RC receiver prototype [(motor-servo driver, telemetry)](https://youtu.be/jPN5YdQ-3K0?si=AT5yUzox_M3fIWEb)
+## RC receiver prototype [(motor driver, servo driver, telemetry)](https://youtu.be/jPN5YdQ-3K0?si=AT5yUzox_M3fIWEb)
 <img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_motor_servo_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_motor_servo_2.jpg" width="415">
 
 ## RC receiver prototype [(mix tank-arcade motor driver, telemetry)](https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor_Mix_Tank)
