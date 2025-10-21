@@ -56,16 +56,15 @@ const byte address[] = "jirka";
 
 // Settings PWM (pin D9 or D10 are paired on timer1/16-bit, Servo library)
 // 1024 = 30Hz, 256 = 122Hz, 64 = 488Hz(default), 8 = 3906Hz
-#define PWM_MOTOR_A  256
+#define PWM_MOTOR_A  64
 
 // Settings PWM (pin D3 or D11 are paired on timer2/8-bit, ServoTimer2 library)
 // 1024 = 30Hz, 256 = 122Hz, 128 = 244Hz, 64 = 488Hz(default), 32 = 976Hz, 8 = 3906Hz
-#define PWM_MOTOR_B  256
+#define PWM_MOTOR_B  64
 
 // Free pins
 // Pin                     0
 // Pin                     1
-// Pin                     2
 // Pin                     4
 // Pin                     5
 // Pin                     6
@@ -73,6 +72,7 @@ const byte address[] = "jirka";
 // Pin                     8
 // Pin                     12 // MISO
 // Pin                     13 // SCK
+// Pin                     A5
 // Pin                     A6
  
 // PWM pins for motor
@@ -82,7 +82,7 @@ const byte address[] = "jirka";
 #define PIN_PWM_4_MOTOR_B  11 // MOSI
 
 // LED alarm
-#define PIN_LED            A5
+#define PIN_LED            2
 
 // Input battery
 #define PIN_BATTERY        A7
