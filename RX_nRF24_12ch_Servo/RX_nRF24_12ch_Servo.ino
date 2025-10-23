@@ -25,7 +25,7 @@ const byte address[] = "jirka";
 
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2
-#define MONITORED_VOLTAGE  3.35
+#define MONITORED_VOLTAGE  3.45
 
 // Setting the control range value
 #define MIN_CONTROL_VAL  1000

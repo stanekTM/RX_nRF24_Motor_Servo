@@ -40,7 +40,7 @@ const byte address[] = "jirka";
 
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2
-#define MONITORED_VOLTAGE  3.35
+#define MONITORED_VOLTAGE  3.45
 
 // Setting the dead zone of poor quality joysticks TX for the motor controller
 #define DEAD_ZONE  15
