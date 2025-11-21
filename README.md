@@ -18,12 +18,6 @@ The code is Arduino.
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
-
-## Used libraries
-* <RF24.h>      v1.4.11
-* <DigitalIO.h> v1.0.1
-* <Servo.h>     v1.2.2
-
 ## Micro RC receiver [(motor driver, telemetry, lap reader transponder)](https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor)
 <a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="640"></a>
 
