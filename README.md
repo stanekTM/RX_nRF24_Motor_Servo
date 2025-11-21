@@ -20,9 +20,9 @@ The code is Arduino.
 
 
 ## Used libraries
-* <RF24.h>      https://github.com/nRF24/RF24
-* <DigitalIO.h> https://github.com/greiman/DigitalIO
-* <Servo.h>     Arduino standard library
+* <RF24.h>      v1.4.11
+* <DigitalIO.h> v1.0.1
+* <Servo.h>     v1.2.2
 
 ## Micro RC receiver [(motor driver, telemetry, lap reader transponder)](https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor)
 <a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="640"></a>
