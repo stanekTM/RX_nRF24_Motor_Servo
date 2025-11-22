@@ -1,5 +1,5 @@
 # RC receiver 2ch (motor driver, telemetry, laps transponder)
-Includes nRF24L01+ transceiver, ATmega328P processor, 2x motor controller, laps transponder and telemetry.
+Includes nRF24L01+ transceiver, ATmega328P/PB processor, 2x motor controller, laps transponder and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
@@ -41,10 +41,6 @@ A2  - SCK
 A3  - MOSI
 A4  - MISO
 ```
-
-## Used libraries
-* <RF24.h>      https://github.com/nRF24/RF24
-* <DigitalIO.h> https://github.com/greiman/DigitalIO
 
 ## Example micro RX
 <a href="https://youtu.be/E0pgMNPuYU4"><img src="https://github.com/stanekTM/RX_nRF24_Motor_Servo/blob/master/documents/micro_rx_youtube.PNG" width="640"></a>

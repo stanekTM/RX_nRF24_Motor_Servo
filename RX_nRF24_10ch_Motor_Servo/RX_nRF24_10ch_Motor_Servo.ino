@@ -16,7 +16,7 @@
 //#include <printf.h>  // Print the radio debug info
 #include <DigitalIO.h> // v1.0.1
 #include <Servo.h>     // v1.2.2
-#include "PWMFrequency.h"
+#include "PWM_Frequency.h"
 
 
 // Setting a unique address (5 bytes number or character)

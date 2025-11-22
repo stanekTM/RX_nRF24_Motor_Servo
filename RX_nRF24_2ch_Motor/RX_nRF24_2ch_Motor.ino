@@ -15,7 +15,7 @@
 #include <RF24.h>      // v1.4.11
 //#include <printf.h>  // Print the radio debug info
 #include <DigitalIO.h> // v1.0.1
-#include "PWMFrequency.h"
+#include "PWM_Frequency.h"
 
 
 // Setting a unique address (5 bytes number or character)

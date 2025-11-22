@@ -1,5 +1,5 @@
 # RC receiver 10ch (motor driver, servo driver, telemetry)
-Includes nRF24L01+ transceiver, ATmega328P processor, 2x motor controller, servo outputs and telemetry.
+Includes nRF24L01+ transceiver, ATmega328P/PB processor, 2x motor controller, servo outputs and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
@@ -49,8 +49,3 @@ A2  - SCK
 A3  - MOSI
 A4  - MISO
 ```
-
-## Used libraries
-* <RF24.h>      https://github.com/nRF24/RF24
-* <DigitalIO.h> https://github.com/greiman/DigitalIO
-* <Servo.h> Arduino standard library
