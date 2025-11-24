@@ -13,10 +13,11 @@
 */
 
 #include <RF24.h>      // v1.4.11
+#include <RF24_config.h>
+#include <nRF24L01.h>
 //#include <printf.h>  // Print the radio debug info
 #include <DigitalIO.h> // v1.0.1
 #include <Servo.h>     // v1.2.2
-
 
 // Setting a unique address (5 bytes number or character)
 const byte address[] = "jirka";
