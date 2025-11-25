@@ -95,24 +95,42 @@ const byte address[] = "jirka";
 // 1 = 31250Hz
 //#define PWM_MOTOR_B  64
 
-// Free pins
-// Pin                     0
-// Pin                     1
-// Pin                     4
-// Pin                     5
-// Pin                     6
-// Pin                     7
-// Pin                     8
-// Pin                     12 // MISO
-// Pin                     13 // SCK
-// Pin                     A5
-// Pin                     A6
- 
+// ATmega328P/PB pins overview
+// PD0 - D0   PWM  328PB
+// PD1 - D1   PWM  328PB
+// PD2 - D2   PWM  328PB
+// PD3 - D3   PWM
+// PD4 - D4
+// PD5 - D5   PWM
+// PD6 - D6   PWM
+// PD7 - D7
+// PB0 - D8
+// PB1 - D9   PWM
+// PB2 - D10  PWM
+// PB3 - D11  PWM  MOSI
+// PB4 - D12       MISO
+// PB5 - D13       SCK
+// PC0 - D14 / A0
+// PC1 - D15 / A1
+// PC2 - D16 / A2
+// PC3 - D17 / A3
+// PC4 - D18 / A4   SDA
+// PC5 - D19 / A5   SCL
+// PB6 - D20        XTAL1
+// PB7 - D21        XTAL2
+// PC6 - D22        RESET
+// PE0 - D23        328PB
+// PE1 - D24        328PB
+// PE2 - D25 / A6   328PB
+// PE3 - D26 / A7   328PB
+// ADC6   -    A6
+// ADC7   -    A7
+
 // PWM pins for motor
 #define PIN_PWM_1_MOTOR_A  9
 #define PIN_PWM_2_MOTOR_A  10
 #define PIN_PWM_3_MOTOR_B  3
-#define PIN_PWM_4_MOTOR_B  11 // MOSI
+#define PIN_PWM_4_MOTOR_B  11
 
 // LED alarm
 #define PIN_LED            2
@@ -125,9 +143,9 @@ const byte address[] = "jirka";
 #define PIN_CSN            A1
 
 // Software SPI https://nrf24.github.io/RF24/md_docs_2arduino.html
-//----- SCK           16 - A2
-//----- MOSI          17 - A3
-//----- MISO          18 - A4
+//          SCK            A2
+//          MOSI           A3
+//          MISO           A4
 
 // nRF24 class driver
 RF24 radio(PIN_CE, PIN_CSN);
