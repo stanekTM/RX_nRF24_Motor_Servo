@@ -95,16 +95,16 @@ void setPWMPrescaler(uint8_t pin, uint16_t prescale)
   {
     TCCR2B = (TCCR2B & 0b11111000) | mode;
   }
-#ifdef ATmega328PB
-  else if (pin == 0) // 328PB 16-bit Timer/Counter 3, PD0(0)RX, unused specific pin PD2(2)
+ #ifdef __AVR_ATmega328PB__
+  else if (pin == 0) // 328PB 16-bit Timer/Counter 3, PD0(0)RX, not paired with specific pin PD2(2)
   {
     TCCR3B = (TCCR3B & 0b11111000) | mode;
   }
-  else if (pin == 1) // 328PB 16-bit Timer/Counter 4, PD1(1)TX, unused specific pin PD2(2)
+  else if (pin == 1) // 328PB 16-bit Timer/Counter 4, PD1(1)TX, paired with specific pin PD2(2)
   {
     TCCR4B = (TCCR4B & 0b11111000) | mode;
   }
-#endif
+ #endif
 }
 
 #endif
