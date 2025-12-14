@@ -29,11 +29,6 @@ const byte address[] = "jirka";
 #define BATTERY_VOLTAGE    4.2
 #define MONITORED_VOLTAGE  3.45
 
-// Setting the control range value
-#define MIN_CONTROL_VAL  1000
-#define MID_CONTROL_VAL  1500
-#define MAX_CONTROL_VAL  2000
-
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB
 // PD1 - D1   PWM  328PB
@@ -102,18 +97,18 @@ RF24 radio(PIN_CE, PIN_CSN);
 //*********************************************************************************************************************
 struct rc_packet_size
 {
-  unsigned int ch_servo1  = MID_CONTROL_VAL;
-  unsigned int ch_servo2  = MID_CONTROL_VAL;
-  unsigned int ch_servo3  = MID_CONTROL_VAL;
-  unsigned int ch_servo4  = MID_CONTROL_VAL;
-  unsigned int ch_servo5  = MID_CONTROL_VAL;
-  unsigned int ch_servo6  = MID_CONTROL_VAL;
-  unsigned int ch_servo7  = MID_CONTROL_VAL;
-  unsigned int ch_servo8  = MID_CONTROL_VAL;
-  unsigned int ch_servo9  = MID_CONTROL_VAL;
-  unsigned int ch_servo10 = MID_CONTROL_VAL;
-  unsigned int ch_servo11 = MID_CONTROL_VAL;
-  unsigned int ch_servo12 = MID_CONTROL_VAL;
+  unsigned int ch_servo1  = 1500;
+  unsigned int ch_servo2  = 1500;
+  unsigned int ch_servo3  = 1500;
+  unsigned int ch_servo4  = 1500;
+  unsigned int ch_servo5  = 1500;
+  unsigned int ch_servo6  = 1500;
+  unsigned int ch_servo7  = 1500;
+  unsigned int ch_servo8  = 1500;
+  unsigned int ch_servo9  = 1500;
+  unsigned int ch_servo10 = 1500;
+  unsigned int ch_servo11 = 1500;
+  unsigned int ch_servo12 = 1500;
 };
 rc_packet_size rc_packet;
 
@@ -129,22 +124,22 @@ struct telemetry_packet_size
 telemetry_packet_size telemetry_packet;
 
 //*********************************************************************************************************************
-// Fail-safe, settings 1000-2000 (MIN_CONTROL_VAL = 1000, MID_CONTROL_VAL = 1500, MAX_CONTROL_VAL = 2000)
+// Fail-safe, servo center position 1500
 //*********************************************************************************************************************
 void fail_safe()
 {
-  rc_packet.ch_servo1  = MID_CONTROL_VAL;
-  rc_packet.ch_servo2  = MID_CONTROL_VAL;
-  rc_packet.ch_servo3  = MID_CONTROL_VAL;
-  rc_packet.ch_servo4  = MID_CONTROL_VAL;
-  rc_packet.ch_servo5  = MID_CONTROL_VAL;
-  rc_packet.ch_servo6  = MID_CONTROL_VAL;
-  rc_packet.ch_servo7  = MID_CONTROL_VAL;
-  rc_packet.ch_servo8  = MID_CONTROL_VAL;
-  rc_packet.ch_servo9  = MID_CONTROL_VAL;
-  rc_packet.ch_servo10 = MID_CONTROL_VAL;
-  rc_packet.ch_servo11 = MID_CONTROL_VAL;
-  rc_packet.ch_servo12 = MID_CONTROL_VAL;
+  rc_packet.ch_servo1  = 1500;
+  rc_packet.ch_servo2  = 1500;
+  rc_packet.ch_servo3  = 1500;
+  rc_packet.ch_servo4  = 1500;
+  rc_packet.ch_servo5  = 1500;
+  rc_packet.ch_servo6  = 1500;
+  rc_packet.ch_servo7  = 1500;
+  rc_packet.ch_servo8  = 1500;
+  rc_packet.ch_servo9  = 1500;
+  rc_packet.ch_servo10 = 1500;
+  rc_packet.ch_servo11 = 1500;
+  rc_packet.ch_servo12 = 1500;
 }
 
 //*********************************************************************************************************************

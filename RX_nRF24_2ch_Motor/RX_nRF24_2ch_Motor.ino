@@ -155,8 +155,8 @@ RF24 radio(PIN_CE, PIN_CSN);
 //*********************************************************************************************************************
 struct rc_packet_size
 {
-  unsigned int ch_motorA = MID_CONTROL_VAL;
-  unsigned int ch_motorB = MID_CONTROL_VAL;
+  unsigned int ch_motorA = 1500;
+  unsigned int ch_motorB = 1500;
 };
 rc_packet_size rc_packet;
 
@@ -172,12 +172,12 @@ struct telemetry_packet_size
 telemetry_packet_size telemetry_packet;
 
 //*********************************************************************************************************************
-// Fail-safe, settings 1000-2000 (MIN_CONTROL_VAL = 1000, MID_CONTROL_VAL = 1500, MAX_CONTROL_VAL = 2000)
+// Fail-safe, motor neutral value 1500
 //*********************************************************************************************************************
 void fail_safe()
 {
-  rc_packet.ch_motorA = MID_CONTROL_VAL;
-  rc_packet.ch_motorB = MID_CONTROL_VAL;
+  rc_packet.ch_motorA = 1500;
+  rc_packet.ch_motorB = 1500;
 }
 
 //*********************************************************************************************************************
