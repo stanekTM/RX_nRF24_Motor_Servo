@@ -10,7 +10,7 @@ The option to adjust the brake is included in the code.
 
 ### Works with RC transmitters:
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
-* [**TX_nRF24_5ch_LED**](https://github.com/stanekTM/TX_nRF24_5ch_LED)
+* [**TX_nRF24_4ch_LED**](https://github.com/stanekTM/TX_nRF24_4ch_LED)
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
