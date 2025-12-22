@@ -26,8 +26,8 @@ const byte address[] = "jirka";
 #define RADIO_CHANNEL  76
 
 // Alarm voltage setting
-#define BATTERY_VOLTAGE    4.2
-#define MONITORED_VOLTAGE  3.45
+#define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
+#define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
 
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB

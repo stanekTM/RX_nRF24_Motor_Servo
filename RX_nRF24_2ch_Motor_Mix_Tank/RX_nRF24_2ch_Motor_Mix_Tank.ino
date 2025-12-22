@@ -42,8 +42,8 @@ const byte address[] = "jirka";
 #define BRAKE_MOTOR_B  255
 
 // Alarm voltage setting
-#define BATTERY_VOLTAGE    4.2
-#define MONITORED_VOLTAGE  3.45
+#define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
+#define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
 
 // Setting the dead zone of poor quality joysticks TX for the motor controller
 #define DEAD_ZONE  15
