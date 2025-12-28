@@ -245,12 +245,10 @@ void send_and_receive_data()
     rf_timeout = millis();
   }
   
-  if (millis() - packet_time > 1000)
+  if (millis() - packet_time > 360)
   {
     packet_time = millis();
-    
-    telemetry_packet.rssi = packet_counter;
-    
+    telemetry_packet.rssi = constrain(packet_counter, 0, 100);
     packet_counter = 0;
   }
 }
