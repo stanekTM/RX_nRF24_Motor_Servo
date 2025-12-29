@@ -1,5 +1,5 @@
 # RC receiver 2ch (mix tank-arcade motor driver, telemetry)
-Includes nRF24L01+ transceiver, ATmega328P/PB processor for PWM motor control and telemetry.
+Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
 The option to adjust the brake is included in the code.
