@@ -228,7 +228,7 @@ void loop()
 //*********************************************************************************************************************
 // Send and receive data
 //*********************************************************************************************************************
-byte packet_counter = 0;
+unsigned int packet_counter = 0;
 unsigned long rf_timeout = 0;
 unsigned long packet_time = 0;
 
@@ -245,10 +245,12 @@ void send_and_receive_data()
     rf_timeout = millis();
   }
   
-  if (millis() - packet_time > 360)
+  if (millis() - packet_time > 1000)
   {
     packet_time = millis();
-    telemetry_packet.rssi = constrain(packet_counter, 0, 100);
+    telemetry_packet.rssi = map(packet_counter, 320, 333, 0, 100); // 333 packets per second
+    telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
+    //Serial.println(packet_counter);
     packet_counter = 0;
   }
 }
