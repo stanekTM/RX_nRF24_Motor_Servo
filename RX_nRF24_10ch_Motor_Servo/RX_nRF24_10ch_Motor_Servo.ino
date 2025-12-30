@@ -385,7 +385,7 @@ bool previous_state_batt;
 
 void batt_monitoring()
 {
-  if (millis() - adc_time > 1000) // Delay ADC reading battery
+  if (millis() - adc_time > 1000) // Battery reading delay
   {
     adc_time = millis();
     
