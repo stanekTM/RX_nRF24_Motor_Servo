@@ -52,6 +52,7 @@
   8 = 3906Hz
   1 = 31250Hz
 */
+
 void setPWMPrescaler(uint8_t pin, uint16_t prescale)
 {
   byte mode;

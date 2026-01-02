@@ -1,6 +1,6 @@
 /*
   *****************************************************************************************************************************
-  RC receiver 10ch (motor-servo driver, telemetry)
+  RC receiver 10ch (motor and servo driver, telemetry)
   ************************************************
   Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_10ch_Motor_Servo
   

@@ -191,7 +191,7 @@ int calc_mix = 258;
 
 void motor_control()
 {
-  // mix tank-arcade
+  // Mix tank-arcade
   ch1 = rc_packet.ch_motorA / 2;
   ch2 = rc_packet.ch_motorB / 2;
   mix1 = ch1 - ch2 + 1500;
