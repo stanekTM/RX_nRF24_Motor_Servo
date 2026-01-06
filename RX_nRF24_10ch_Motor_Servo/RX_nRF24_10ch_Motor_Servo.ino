@@ -369,7 +369,7 @@ void send_and_receive_data()
   if (millis() - packet_time > 1000)
   {
     packet_time = millis();
-    telemetry_packet.rssi = map(packet_counter, 320, 333, 0, 100); // 333 packets per second
+    telemetry_packet.rssi = map(packet_counter, 283, 294, 0, 100);
     telemetry_packet.rssi = constrain(telemetry_packet.rssi, 0, 100);
     //Serial.println(packet_counter);
     packet_counter = 0;
