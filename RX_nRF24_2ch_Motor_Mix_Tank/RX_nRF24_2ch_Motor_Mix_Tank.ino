@@ -6,7 +6,7 @@
 
   Works with RC transmitters:
   TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
-  TX_nRF24_4ch_LED           https://github.com/stanekTM/TX_nRF24_4ch_LED
+  TX_nRF24_2ch_LED           https://github.com/stanekTM/TX_nRF24_2ch_LED
   OpenAVRc                   https://github.com/Ingwie/OpenAVRc_Dev
   Multiprotocol from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
   *******************************************************************************************************************************
@@ -333,7 +333,7 @@ void send_and_receive_data()
 //*********************************************************************************************************************
 unsigned long adc_time = 0;
 bool low_batt = 0; 
-bool previous_state_batt;
+bool previous_state_batt = 0;
 
 void batt_monitoring()
 {
