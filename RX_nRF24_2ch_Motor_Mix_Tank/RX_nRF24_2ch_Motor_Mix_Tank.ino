@@ -134,7 +134,7 @@ const byte address[] = "jirka";
 #define PIN_PWM_4_MOTOR_B  11
 
 // LED alarm
-#define PIN_LED            A5
+#define PIN_LED            2
 
 // Input battery
 #define PIN_BATTERY        A7
