@@ -155,8 +155,8 @@ RF24 radio(PIN_CE, PIN_CSN);
 //*********************************************************************************************************************
 struct rc_packet_size
 {
-  unsigned int ch_motorA = 1500;
-  unsigned int ch_motorB = 1500;
+  unsigned int ch1_motorA = 1500;
+  unsigned int ch2_motorB = 1500;
 };
 rc_packet_size rc_packet;
 
@@ -176,31 +176,31 @@ telemetry_packet_size telemetry_packet;
 //*********************************************************************************************************************
 void fail_safe()
 {
-  rc_packet.ch_motorA = 1500;
-  rc_packet.ch_motorB = 1500;
+  rc_packet.ch1_motorA = 1500;
+  rc_packet.ch2_motorB = 1500;
 }
 
 //*********************************************************************************************************************
 // Motor control
 //*********************************************************************************************************************
-int value_motorA = 0, value_motorB = 0;
+int motorA_val = 0, motorB_val = 0;
 
 void motor_control()
 {
   // Forward motor A
-  if (rc_packet.ch_motorA > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet.ch1_motorA > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    value_motorA = map(rc_packet.ch_motorA, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    value_motorA = constrain(value_motorA, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    analogWrite(PIN_PWM_2_MOTOR_A, value_motorA); 
+    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
+    motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
+    analogWrite(PIN_PWM_2_MOTOR_A, motorA_val); 
     digitalWrite(PIN_PWM_1_MOTOR_A, LOW);
   }
   // Back motor A
-  else if (rc_packet.ch_motorA < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet.ch1_motorA < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    value_motorA = map(rc_packet.ch_motorA, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    value_motorA = constrain(value_motorA, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    analogWrite(PIN_PWM_1_MOTOR_A, value_motorA);
+    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
+    motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
+    analogWrite(PIN_PWM_1_MOTOR_A, motorA_val);
     digitalWrite(PIN_PWM_2_MOTOR_A, LOW);
   }
   else
@@ -208,22 +208,22 @@ void motor_control()
     analogWrite(PIN_PWM_1_MOTOR_A, BRAKE_MOTOR_A);
     analogWrite(PIN_PWM_2_MOTOR_A, BRAKE_MOTOR_A);
   }
-  //Serial.println(value_motorA);
+  //Serial.println(motorA_val);
   
   // Forward motor B
-  if (rc_packet.ch_motorB > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet.ch2_motorB > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    value_motorB = map(rc_packet.ch_motorB, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    value_motorB = constrain(value_motorB, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    analogWrite(PIN_PWM_4_MOTOR_B, value_motorB);
+    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
+    motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
+    analogWrite(PIN_PWM_4_MOTOR_B, motorB_val);
     digitalWrite(PIN_PWM_3_MOTOR_B, LOW);
   }
   // Back motor B
-  else if (rc_packet.ch_motorB < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet.ch2_motorB < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    value_motorB = map(rc_packet.ch_motorB, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    value_motorB = constrain(value_motorB, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    analogWrite(PIN_PWM_3_MOTOR_B, value_motorB);
+    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
+    motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
+    analogWrite(PIN_PWM_3_MOTOR_B, motorB_val);
     digitalWrite(PIN_PWM_4_MOTOR_B, LOW);
   }
   else
@@ -231,7 +231,7 @@ void motor_control()
     analogWrite(PIN_PWM_3_MOTOR_B, BRAKE_MOTOR_B);
     analogWrite(PIN_PWM_4_MOTOR_B, BRAKE_MOTOR_B);
   }
-  //Serial.println(value_motorB);
+  //Serial.println(motorB_val);
 }
 
 //*********************************************************************************************************************

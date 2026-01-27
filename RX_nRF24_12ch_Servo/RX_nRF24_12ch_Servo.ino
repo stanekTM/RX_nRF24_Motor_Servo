@@ -97,18 +97,18 @@ RF24 radio(PIN_CE, PIN_CSN);
 //*********************************************************************************************************************
 struct rc_packet_size
 {
-  unsigned int ch_servo1  = 1500;
-  unsigned int ch_servo2  = 1500;
-  unsigned int ch_servo3  = 1500;
-  unsigned int ch_servo4  = 1500;
-  unsigned int ch_servo5  = 1500;
-  unsigned int ch_servo6  = 1500;
-  unsigned int ch_servo7  = 1500;
-  unsigned int ch_servo8  = 1500;
-  unsigned int ch_servo9  = 1500;
-  unsigned int ch_servo10 = 1500;
-  unsigned int ch_servo11 = 1500;
-  unsigned int ch_servo12 = 1500;
+  unsigned int ch1_servo  = 1500;
+  unsigned int ch2_servo  = 1500;
+  unsigned int ch3_servo  = 1500;
+  unsigned int ch4_servo  = 1500;
+  unsigned int ch5_servo  = 1500;
+  unsigned int ch6_servo  = 1500;
+  unsigned int ch7_servo  = 1500;
+  unsigned int ch8_servo  = 1500;
+  unsigned int ch9_servo  = 1500;
+  unsigned int ch10_servo = 1500;
+  unsigned int ch11_servo = 1500;
+  unsigned int ch12_servo = 1500;
 };
 rc_packet_size rc_packet;
 
@@ -128,18 +128,18 @@ telemetry_packet_size telemetry_packet;
 //*********************************************************************************************************************
 void fail_safe()
 {
-  rc_packet.ch_servo1  = 1500;
-  rc_packet.ch_servo2  = 1500;
-  rc_packet.ch_servo3  = 1500;
-  rc_packet.ch_servo4  = 1500;
-  rc_packet.ch_servo5  = 1500;
-  rc_packet.ch_servo6  = 1500;
-  rc_packet.ch_servo7  = 1500;
-  rc_packet.ch_servo8  = 1500;
-  rc_packet.ch_servo9  = 1500;
-  rc_packet.ch_servo10 = 1500;
-  rc_packet.ch_servo11 = 1500;
-  rc_packet.ch_servo12 = 1500;
+  rc_packet.ch1_servo  = 1500;
+  rc_packet.ch2_servo  = 1500;
+  rc_packet.ch3_servo  = 1500;
+  rc_packet.ch4_servo  = 1500;
+  rc_packet.ch5_servo  = 1500;
+  rc_packet.ch6_servo  = 1500;
+  rc_packet.ch7_servo  = 1500;
+  rc_packet.ch8_servo  = 1500;
+  rc_packet.ch9_servo  = 1500;
+  rc_packet.ch10_servo = 1500;
+  rc_packet.ch11_servo = 1500;
+  rc_packet.ch12_servo = 1500;
 }
 
 //*********************************************************************************************************************
@@ -168,20 +168,20 @@ void attach_servo_pins()
 //*********************************************************************************************************************
 void servo_control()
 {
-  servo1.writeMicroseconds(rc_packet.ch_servo1);
-  servo2.writeMicroseconds(rc_packet.ch_servo2);
-  servo3.writeMicroseconds(rc_packet.ch_servo3);
-  servo4.writeMicroseconds(rc_packet.ch_servo4);
-  servo5.writeMicroseconds(rc_packet.ch_servo5);
-  servo6.writeMicroseconds(rc_packet.ch_servo6);
-  servo7.writeMicroseconds(rc_packet.ch_servo7);
-  servo8.writeMicroseconds(rc_packet.ch_servo8);
-  servo9.writeMicroseconds(rc_packet.ch_servo9);
-  servo10.writeMicroseconds(rc_packet.ch_servo10);
-  servo11.writeMicroseconds(rc_packet.ch_servo11);
-  servo12.writeMicroseconds(rc_packet.ch_servo12);
+  servo1.writeMicroseconds(rc_packet.ch1_servo);
+  servo2.writeMicroseconds(rc_packet.ch2_servo);
+  servo3.writeMicroseconds(rc_packet.ch3_servo);
+  servo4.writeMicroseconds(rc_packet.ch4_servo);
+  servo5.writeMicroseconds(rc_packet.ch5_servo);
+  servo6.writeMicroseconds(rc_packet.ch6_servo);
+  servo7.writeMicroseconds(rc_packet.ch7_servo);
+  servo8.writeMicroseconds(rc_packet.ch8_servo);
+  servo9.writeMicroseconds(rc_packet.ch9_servo);
+  servo10.writeMicroseconds(rc_packet.ch10_servo);
+  servo11.writeMicroseconds(rc_packet.ch11_servo);
+  servo12.writeMicroseconds(rc_packet.ch12_servo);
   
-  //Serial.println(rc_packet.ch_servo1);
+  //Serial.println(rc_packet.ch1_servo);
 }
 
 //*********************************************************************************************************************
