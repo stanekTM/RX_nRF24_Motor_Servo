@@ -192,7 +192,7 @@ void send_and_receive_data()
 {
   if (radio.available())
   {
-    radio.read(&rc_packet, sizeof(rc_packet_size));
+    radio.read(&rc_packet, rc_packet_size);
     
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
