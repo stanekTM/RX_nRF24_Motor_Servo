@@ -151,7 +151,7 @@ const byte address[] = "jirka";
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// This structure defines the data sent (max 32 bytes)
+// Received data structure (max 32 bytes)
 //*********************************************************************************************************************
 struct rc_packet_size
 {
@@ -161,7 +161,7 @@ struct rc_packet_size
 rc_packet_size rc_packet;
 
 //*********************************************************************************************************************
-// This structure defines the received ACK payload data
+// Structure of sent ACK data
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
