@@ -1,4 +1,4 @@
-# RC receiver 12ch (servo driver, telemetry)
+# RC receiver 1 to 12 servo channels
 Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs and telemetry.
 
 ### Receiver specification:
