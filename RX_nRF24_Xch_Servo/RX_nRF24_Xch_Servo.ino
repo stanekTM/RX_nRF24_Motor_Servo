@@ -31,6 +31,9 @@ const byte address[] = "jirka";
 #define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
 #define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
 
+// Setting the number of channels (max 12)
+#define CHANNELS  12
+
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB
 // PD1 - D1   PWM  328PB
@@ -62,19 +65,8 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// Pins for servos
-#define PIN_SERVO_1   2
-#define PIN_SERVO_2   3
-#define PIN_SERVO_3   4
-#define PIN_SERVO_4   5
-#define PIN_SERVO_5   6
-#define PIN_SERVO_6   7
-#define PIN_SERVO_7   8
-#define PIN_SERVO_8   9
-#define PIN_SERVO_9   10
-#define PIN_SERVO_10  11
-#define PIN_SERVO_11  12
-#define PIN_SERVO_12  13
+// Pins for servos (max 12)
+const byte pins_servo[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
 // LED alarm
 #define PIN_LED       A5
@@ -95,27 +87,13 @@ const byte address[] = "jirka";
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// This structure defines the data sent (max 32 bytes)
+// Received data array (max 32 bytes)
 //*********************************************************************************************************************
-struct rc_packet_size
-{
-  unsigned int ch1_servo  = 1500;
-  unsigned int ch2_servo  = 1500;
-  unsigned int ch3_servo  = 1500;
-  unsigned int ch4_servo  = 1500;
-  unsigned int ch5_servo  = 1500;
-  unsigned int ch6_servo  = 1500;
-  unsigned int ch7_servo  = 1500;
-  unsigned int ch8_servo  = 1500;
-  unsigned int ch9_servo  = 1500;
-  unsigned int ch10_servo = 1500;
-  unsigned int ch11_servo = 1500;
-  unsigned int ch12_servo = 1500;
-};
-rc_packet_size rc_packet;
+unsigned int rc_packet[CHANNELS] = {1500};
+byte rc_packet_size = CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)
 
 //*********************************************************************************************************************
-// This structure defines the received ACK payload data
+// Structure of sent ACK data
 //*********************************************************************************************************************
 struct telemetry_packet_size
 {
@@ -128,41 +106,27 @@ telemetry_packet_size telemetry_packet;
 //*********************************************************************************************************************
 // Fail-safe, servo center position 1500
 //*********************************************************************************************************************
+byte i;
+
 void fail_safe()
 {
-  rc_packet.ch1_servo  = 1500;
-  rc_packet.ch2_servo  = 1500;
-  rc_packet.ch3_servo  = 1500;
-  rc_packet.ch4_servo  = 1500;
-  rc_packet.ch5_servo  = 1500;
-  rc_packet.ch6_servo  = 1500;
-  rc_packet.ch7_servo  = 1500;
-  rc_packet.ch8_servo  = 1500;
-  rc_packet.ch9_servo  = 1500;
-  rc_packet.ch10_servo = 1500;
-  rc_packet.ch11_servo = 1500;
-  rc_packet.ch12_servo = 1500;
+  for (i = 0; i < CHANNELS; i++)
+  {
+    rc_packet[i] = 1500;
+  }
 }
 
 //*********************************************************************************************************************
 // Attach servo pins
 //*********************************************************************************************************************
-Servo servo1, servo2, servo3, servo4, servo5, servo6, servo7, servo8, servo9, servo10, servo11, servo12;
+Servo servo[CHANNELS];
 
 void attach_servo_pins()
 {
-  servo1.attach(PIN_SERVO_1);
-  servo2.attach(PIN_SERVO_2);
-  servo3.attach(PIN_SERVO_3);
-  servo4.attach(PIN_SERVO_4);
-  servo5.attach(PIN_SERVO_5);
-  servo6.attach(PIN_SERVO_6);
-  servo7.attach(PIN_SERVO_7);
-  servo8.attach(PIN_SERVO_8);
-  servo9.attach(PIN_SERVO_9);
-  servo10.attach(PIN_SERVO_10);
-  servo11.attach(PIN_SERVO_11);
-  servo12.attach(PIN_SERVO_12);
+  for (i = 0; i < CHANNELS; i++)
+  {
+    servo[i].attach(pins_servo[i]);
+  }
 }
 
 //*********************************************************************************************************************
@@ -170,20 +134,11 @@ void attach_servo_pins()
 //*********************************************************************************************************************
 void servo_control()
 {
-  servo1.writeMicroseconds(rc_packet.ch1_servo);
-  servo2.writeMicroseconds(rc_packet.ch2_servo);
-  servo3.writeMicroseconds(rc_packet.ch3_servo);
-  servo4.writeMicroseconds(rc_packet.ch4_servo);
-  servo5.writeMicroseconds(rc_packet.ch5_servo);
-  servo6.writeMicroseconds(rc_packet.ch6_servo);
-  servo7.writeMicroseconds(rc_packet.ch7_servo);
-  servo8.writeMicroseconds(rc_packet.ch8_servo);
-  servo9.writeMicroseconds(rc_packet.ch9_servo);
-  servo10.writeMicroseconds(rc_packet.ch10_servo);
-  servo11.writeMicroseconds(rc_packet.ch11_servo);
-  servo12.writeMicroseconds(rc_packet.ch12_servo);
-  
-  //Serial.println(rc_packet.ch1_servo);
+  for (i = 0; i < CHANNELS; i++)
+  {
+    servo[i].writeMicroseconds(rc_packet[i]);
+  }
+  //Serial.println(rc_packet[0]);
 }
 
 //*********************************************************************************************************************
