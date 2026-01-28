@@ -8,7 +8,7 @@
   
   Works with RC transmitters:
   TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
-  TX_nRF24_2ch_LED           https://github.com/stanekTM/TX_nRF24_2ch_LED
+  TX_nRF24_Xch_LED           https://github.com/stanekTM/TX_nRF24_Xch_LED
   OpenAVRc                   https://github.com/Ingwie/OpenAVRc_Dev
   Multiprotocol from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
   ***********************************************************************************************************************
@@ -65,7 +65,7 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// Pins for servos (max 12)
+// Pins for servos (possible combination, max 12)
 const byte pins_servo[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
 // LED alarm

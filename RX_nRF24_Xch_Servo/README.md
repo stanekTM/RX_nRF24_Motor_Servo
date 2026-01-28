@@ -6,7 +6,7 @@ Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs
 
 ### Works with RC transmitters:
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
-* [**TX_nRF24_2ch_LED**](https://github.com/stanekTM/TX_nRF24_2ch_LED)
+* [**TX_nRF24_Xch_LED**](https://github.com/stanekTM/TX_nRF24_Xch_LED)
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
@@ -18,18 +18,9 @@ Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs
 
 ## Arduino pins
 ```
-D2  - servo 1
-D3  - servo 2
-D4  - servo 3
-D5  - servo 4
-D6  - servo 5
-D7  - servo 6
-D8  - servo 7
-D9  - servo 8
-D10 - servo 9
-D11 - servo 10
-D12 - servo 11
-D13 - servo 12
+Servo pins:
+Number of servos as needed (possible combination, max 12)
+D2 - D13
 
 A5  - LED
 A7  - telemetry analog input RX battery
