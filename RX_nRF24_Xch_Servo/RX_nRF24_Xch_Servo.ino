@@ -27,12 +27,12 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
+// Setting the number of channels (max 12)
+#define RC_CHANNELS  12
+
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
 #define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
-
-// Setting the number of channels (max 12)
-#define CHANNELS  12
 
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB
@@ -89,8 +89,8 @@ RF24 radio(PIN_CE, PIN_CSN);
 //*********************************************************************************************************************
 // Received data array (max 32 bytes)
 //*********************************************************************************************************************
-unsigned int rc_packet[CHANNELS] = {1500};
-byte rc_packet_size = CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)
+unsigned int rc_packet[RC_CHANNELS] = {1500};
+byte rc_packet_size = RC_CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)
 
 //*********************************************************************************************************************
 // Structure of sent ACK data
@@ -106,12 +106,12 @@ telemetry_packet_size telemetry_packet;
 //*********************************************************************************************************************
 // Attach servo pins
 //*********************************************************************************************************************
-Servo servo[CHANNELS];
+Servo servo[RC_CHANNELS];
 byte i;
 
 void attach_servo_pins()
 {
-  for (i = 0; i < CHANNELS; i++)
+  for (i = 0; i < RC_CHANNELS; i++)
   {
     servo[i].attach(pins_servo[i]);
   }
@@ -122,7 +122,7 @@ void attach_servo_pins()
 //*********************************************************************************************************************
 void servo_control()
 {
-  for (i = 0; i < CHANNELS; i++)
+  for (i = 0; i < RC_CHANNELS; i++)
   {
     servo[i].writeMicroseconds(rc_packet[i]);
   }
@@ -134,7 +134,7 @@ void servo_control()
 //*********************************************************************************************************************
 void fail_safe()
 {
-  for (i = 0; i < CHANNELS; i++)
+  for (i = 0; i < RC_CHANNELS; i++)
   {
     rc_packet[i] = 1500;
   }
@@ -143,7 +143,7 @@ void fail_safe()
 //*********************************************************************************************************************
 // Program setup
 //*********************************************************************************************************************
-byte retry_delay = (CHANNELS * 3) / 7;
+byte retry_delay = (RC_CHANNELS * 3) / 7;
 
 void setup()
 {

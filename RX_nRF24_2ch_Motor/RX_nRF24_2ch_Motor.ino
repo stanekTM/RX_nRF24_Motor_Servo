@@ -1,7 +1,9 @@
 /*
   *********************************************************************************************************************
-  RC receiver 2ch (motor driver, telemetry)
-  *****************************************
+  RC receiver 2 channels
+  **********************
+  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control and telemetry.
+  
   Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor
   
   Works with RC transmitters:
@@ -24,6 +26,9 @@ const byte address[] = "jirka";
 
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
+
+// Setting the number of motor A and B channels (max 2)
+#define RC_CHANNELS  2
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR_A  0
@@ -126,11 +131,11 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// PWM pins for motor
-#define PIN_PWM_1_MOTOR_A  9
-#define PIN_PWM_2_MOTOR_A  10
-#define PIN_PWM_3_MOTOR_B  3
-#define PIN_PWM_4_MOTOR_B  11
+// PWM pins for motor A (possible combination, max 2)
+const byte pins_motorA[] = {9, 10};
+
+// PWM pins for motor B (possible combination, max 2)
+const byte pins_motorB[] = {3, 11};
 
 // LED alarm
 #define PIN_LED            2
@@ -151,14 +156,10 @@ const byte address[] = "jirka";
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// Received data structure (max 32 bytes)
+// Received data array (max 32 bytes)
 //*********************************************************************************************************************
-struct rc_packet_size
-{
-  unsigned int ch1_motorA = 1500;
-  unsigned int ch2_motorB = 1500;
-};
-rc_packet_size rc_packet;
+unsigned int rc_packet[RC_CHANNELS] = {1500};
+byte rc_packet_size = RC_CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)
 
 //*********************************************************************************************************************
 // Structure of sent ACK data
@@ -172,15 +173,6 @@ struct telemetry_packet_size
 telemetry_packet_size telemetry_packet;
 
 //*********************************************************************************************************************
-// Fail-safe, motor neutral value 1500
-//*********************************************************************************************************************
-void fail_safe()
-{
-  rc_packet.ch1_motorA = 1500;
-  rc_packet.ch2_motorB = 1500;
-}
-
-//*********************************************************************************************************************
 // Motor control
 //*********************************************************************************************************************
 int motorA_val = 0, motorB_val = 0;
@@ -188,50 +180,61 @@ int motorA_val = 0, motorB_val = 0;
 void motor_control()
 {
   // Forward motor A
-  if (rc_packet.ch1_motorA > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet[0] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
+    motorA_val = map(rc_packet[0], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
     motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    analogWrite(PIN_PWM_2_MOTOR_A, motorA_val); 
-    digitalWrite(PIN_PWM_1_MOTOR_A, LOW);
+    analogWrite(pins_motorA[1], motorA_val); 
+    digitalWrite(pins_motorA[0], LOW);
   }
   // Back motor A
-  else if (rc_packet.ch1_motorA < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet[0] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
+    motorA_val = map(rc_packet[0], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
     motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    analogWrite(PIN_PWM_1_MOTOR_A, motorA_val);
-    digitalWrite(PIN_PWM_2_MOTOR_A, LOW);
+    analogWrite(pins_motorA[0], motorA_val);
+    digitalWrite(pins_motorA[1], LOW);
   }
   else
   {
-    analogWrite(PIN_PWM_1_MOTOR_A, BRAKE_MOTOR_A);
-    analogWrite(PIN_PWM_2_MOTOR_A, BRAKE_MOTOR_A);
+    analogWrite(pins_motorA[0], BRAKE_MOTOR_A);
+    analogWrite(pins_motorA[1], BRAKE_MOTOR_A);
   }
   //Serial.println(motorA_val);
   
   // Forward motor B
-  if (rc_packet.ch2_motorB > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
+    motorB_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
     motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    analogWrite(PIN_PWM_4_MOTOR_B, motorB_val);
-    digitalWrite(PIN_PWM_3_MOTOR_B, LOW);
+    analogWrite(pins_motorB[1], motorB_val);
+    digitalWrite(pins_motorB[0], LOW);
   }
   // Back motor B
-  else if (rc_packet.ch2_motorB < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet[1] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
+    motorB_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
     motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    analogWrite(PIN_PWM_3_MOTOR_B, motorB_val);
-    digitalWrite(PIN_PWM_4_MOTOR_B, LOW);
+    analogWrite(pins_motorB[0], motorB_val);
+    digitalWrite(pins_motorB[1], LOW);
   }
   else
   {
-    analogWrite(PIN_PWM_3_MOTOR_B, BRAKE_MOTOR_B);
-    analogWrite(PIN_PWM_4_MOTOR_B, BRAKE_MOTOR_B);
+    analogWrite(pins_motorB[0], BRAKE_MOTOR_B);
+    analogWrite(pins_motorB[1], BRAKE_MOTOR_B);
   }
   //Serial.println(motorB_val);
+}
+
+//*********************************************************************************************************************
+// Fail-safe, motor neutral value 1500
+//*********************************************************************************************************************
+void fail_safe()
+{
+  for (byte i = 0; i < RC_CHANNELS; i++)
+  {
+    rc_packet[i] = 1500;
+  }
 }
 
 //*********************************************************************************************************************
@@ -242,10 +245,10 @@ void setup()
   //Serial.begin(9600);
   //printf_begin(); // Print the radio debug info
   
-  pinMode(PIN_PWM_1_MOTOR_A, OUTPUT);
-  pinMode(PIN_PWM_2_MOTOR_A, OUTPUT);
-  pinMode(PIN_PWM_3_MOTOR_B, OUTPUT);
-  pinMode(PIN_PWM_4_MOTOR_B, OUTPUT);
+  pinMode(pins_motorA[0], OUTPUT);
+  pinMode(pins_motorA[1], OUTPUT);
+  pinMode(pins_motorB[0], OUTPUT);
+  pinMode(pins_motorB[1], OUTPUT);
   
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_BATTERY, INPUT);
@@ -253,8 +256,8 @@ void setup()
   fail_safe();
   
   // Setting the motor frequency
-  setPWMPrescaler(PIN_PWM_1_MOTOR_A, PWM_MOTOR_A);
-  setPWMPrescaler(PIN_PWM_3_MOTOR_B, PWM_MOTOR_B);
+  setPWMPrescaler(pins_motorA[0], PWM_MOTOR_A);
+  setPWMPrescaler(pins_motorB[0], PWM_MOTOR_B);
   
   // Define the radio communication
   radio.begin();
@@ -294,7 +297,7 @@ void send_and_receive_data()
 {
   if (radio.available())
   {
-    radio.read(&rc_packet, sizeof(rc_packet_size));
+    radio.read(&rc_packet, rc_packet_size);
     
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     

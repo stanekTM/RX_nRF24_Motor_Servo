@@ -28,6 +28,12 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
+// Setting the number of motor A and B channels (max 2)
+#define MOTOR_CHANNELS  2
+
+// Setting the number of servo channels (max 8)
+#define SERVO_CHANNELS  8
+
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR_A  0
 #define ACCELERATE_MOTOR_B  0
@@ -46,12 +52,6 @@ const byte address[] = "jirka";
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
 #define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
-
-// Setting the number of motor A and B channels (max 2)
-#define MOTOR_CHANNELS  2
-
-// Setting the number of servo channels (max 8)
-#define SERVO_CHANNELS  8
 
 // Setting the dead zone of poor quality joysticks TX for the motor controller
 #define DEAD_ZONE  15
