@@ -23,7 +23,7 @@
 const byte address[] = "jirka";
 
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
-#define RADIO_CHANNEL  76
+#define RF_CHANNEL  76
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR_A  0
@@ -262,7 +262,7 @@ void setup()
   radio.enableAckPayload();
   radio.enableDynamicPayloads();
   radio.setRetries(0, 0);
-  radio.setChannel(RADIO_CHANNEL);
+  radio.setChannel(RF_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_MIN); // RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
   radio.openReadingPipe(1, address);

@@ -1,8 +1,10 @@
 /*
   *****************************************************************************************************************************
-  RC receiver 10ch (motor and servo driver, telemetry)
-  ************************************************
-  Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_10ch_Motor_Servo
+  RC receiver 1 to 2 motor channels and 1 to 8 servo channels
+  ***********************************************************
+  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control or servo outputs and telemetry.
+  
+  Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_Xch_Motor_Servo
   
   Works with RC transmitters:
   TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
@@ -24,7 +26,7 @@
 const byte address[] = "jirka";
 
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
-#define RADIO_CHANNEL  76
+#define RF_CHANNEL  76
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR_A  0
@@ -44,6 +46,12 @@ const byte address[] = "jirka";
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
 #define MONITORED_VOLTAGE  3.45 // Minimum battery voltage for alarm
+
+// Setting the number of motor A and B channels (max 2)
+#define MOTOR_CHANNELS  2
+
+// Setting the number of servo channels (max 8)
+#define SERVO_CHANNELS  8
 
 // Setting the dead zone of poor quality joysticks TX for the motor controller
 #define DEAD_ZONE  15
@@ -127,21 +135,14 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// Pins for servos
-#define PIN_SERVO_1        2
-#define PIN_SERVO_2        4
-#define PIN_SERVO_3        7
-#define PIN_SERVO_4        8
-#define PIN_SERVO_5        9
-#define PIN_SERVO_6        10
-#define PIN_SERVO_7        12
-#define PIN_SERVO_8        13
- 
-// PWM pins for motor
-#define PIN_PWM_1_MOTOR_A  5
-#define PIN_PWM_2_MOTOR_A  6
-#define PIN_PWM_3_MOTOR_B  3
-#define PIN_PWM_4_MOTOR_B  11
+// PWM pins for motor A (possible combination, max 2)
+const byte pins_motorA[] = {5, 6};
+
+// PWM pins for motor B (possible combination, max 2)
+const byte pins_motorB[] = {3, 11};
+
+// Pins for servos (possible combination, max 8)
+const byte pins_servo[] = {2, 4, 7, 8, 9, 10, 12, 13};
 
 // LED alarm
 #define PIN_LED            A5
@@ -162,22 +163,12 @@ const byte address[] = "jirka";
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// Received data structure (max 32 bytes)
+// Received data array (max 32 bytes)
 //*********************************************************************************************************************
-struct rc_packet_size
-{
-  unsigned int ch1_motorA = 1500;
-  unsigned int ch2_motorB = 1500;
-  unsigned int ch3_servo  = 1500;
-  unsigned int ch4_servo  = 1500;
-  unsigned int ch5_servo  = 1500;
-  unsigned int ch6_servo  = 1500;
-  unsigned int ch7_servo  = 1500;
-  unsigned int ch8_servo  = 1500;
-  unsigned int ch9_servo  = 1500;
-  unsigned int ch10_servo = 1500;
-};
-rc_packet_size rc_packet;
+const byte rc_channels = MOTOR_CHANNELS + SERVO_CHANNELS;
+
+unsigned int rc_packet[rc_channels] = {1500};
+byte rc_packet_size = rc_channels * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)
 
 //*********************************************************************************************************************
 // Structure of sent ACK data
@@ -191,37 +182,17 @@ struct telemetry_packet_size
 telemetry_packet_size telemetry_packet;
 
 //*********************************************************************************************************************
-// Fail-safe, motor neutral value 1500, servo center position 1500
-//*********************************************************************************************************************
-void fail_safe()
-{
-  rc_packet.ch1_motorA = 1500;
-  rc_packet.ch2_motorB = 1500;
-  rc_packet.ch3_servo  = 1500;
-  rc_packet.ch4_servo  = 1500;
-  rc_packet.ch5_servo  = 1500;
-  rc_packet.ch6_servo  = 1500;
-  rc_packet.ch7_servo  = 1500;
-  rc_packet.ch8_servo  = 1500;
-  rc_packet.ch9_servo  = 1500;
-  rc_packet.ch10_servo = 1500;
-}
-
-//*********************************************************************************************************************
 // Attach servo pins
 //*********************************************************************************************************************
-Servo servo1, servo2, servo3, servo4, servo5, servo6, servo7, servo8;
+Servo servo[SERVO_CHANNELS];
+byte i;
 
 void attach_servo_pins()
 {
-  servo1.attach(PIN_SERVO_1);
-  servo2.attach(PIN_SERVO_2);
-  servo3.attach(PIN_SERVO_3);
-  servo4.attach(PIN_SERVO_4);
-  servo5.attach(PIN_SERVO_5);
-  servo6.attach(PIN_SERVO_6);
-  servo7.attach(PIN_SERVO_7);
-  servo8.attach(PIN_SERVO_8);
+  for (i = 0; i < SERVO_CHANNELS; i++)
+  {
+    servo[i].attach(pins_servo[i]);
+  }
 }
 
 //*********************************************************************************************************************
@@ -229,16 +200,22 @@ void attach_servo_pins()
 //*********************************************************************************************************************
 void servo_control()
 {
-  servo1.writeMicroseconds(rc_packet.ch3_servo);
-  servo2.writeMicroseconds(rc_packet.ch4_servo);
-  servo3.writeMicroseconds(rc_packet.ch5_servo);
-  servo4.writeMicroseconds(rc_packet.ch6_servo);
-  servo5.writeMicroseconds(rc_packet.ch7_servo);
-  servo6.writeMicroseconds(rc_packet.ch8_servo);
-  servo7.writeMicroseconds(rc_packet.ch9_servo);
-  servo8.writeMicroseconds(rc_packet.ch10_servo);
-  
-  //Serial.println(rc_packet.ch3_servo);
+  for (i = 0; i < SERVO_CHANNELS; i++)
+  {
+    servo[i].writeMicroseconds(rc_packet[i]);
+  }
+  //Serial.println(rc_packet[2]);
+}
+
+//*********************************************************************************************************************
+// Fail-safe, servo center position 1500
+//*********************************************************************************************************************
+void fail_safe()
+{
+  for (i = 0; i < rc_channels; i++)
+  {
+    rc_packet[i] = 1500;
+  }
 }
 
 //*********************************************************************************************************************
@@ -249,48 +226,48 @@ int motorA_val = 0, motorB_val = 0;
 void motor_control()
 {
   // Forward motor A
-  if (rc_packet.ch1_motorA > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet[0] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
+    motorA_val = map(rc_packet[0], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
     motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    analogWrite(PIN_PWM_2_MOTOR_A, motorA_val); 
-    digitalWrite(PIN_PWM_1_MOTOR_A, LOW);
+    analogWrite(pins_motorA[1], motorA_val); 
+    digitalWrite(pins_motorA[0], LOW);
   }
   // Back motor A
-  else if (rc_packet.ch1_motorA < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet[0] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorA_val = map(rc_packet.ch1_motorA, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
+    motorA_val = map(rc_packet[0], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
     motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    analogWrite(PIN_PWM_1_MOTOR_A, motorA_val);
-    digitalWrite(PIN_PWM_2_MOTOR_A, LOW);
+    analogWrite(pins_motorA[0], motorA_val);
+    digitalWrite(pins_motorA[1], LOW);
   }
   else
   {
-    analogWrite(PIN_PWM_1_MOTOR_A, BRAKE_MOTOR_A);
-    analogWrite(PIN_PWM_2_MOTOR_A, BRAKE_MOTOR_A);
+    analogWrite(pins_motorA[0], BRAKE_MOTOR_A);
+    analogWrite(pins_motorA[1], BRAKE_MOTOR_A);
   }
   //Serial.println(motorA_val);
   
   // Forward motor B
-  if (rc_packet.ch2_motorB > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
+    motorB_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
     motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    analogWrite(PIN_PWM_4_MOTOR_B, motorB_val);
-    digitalWrite(PIN_PWM_3_MOTOR_B, LOW);
+    analogWrite(pins_motorB[1], motorB_val);
+    digitalWrite(pins_motorB[0], LOW);
   }
   // Back motor B
-  else if (rc_packet.ch2_motorB < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet[1] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorB_val = map(rc_packet.ch2_motorB, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
+    motorB_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
     motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    analogWrite(PIN_PWM_3_MOTOR_B, motorB_val);
-    digitalWrite(PIN_PWM_4_MOTOR_B, LOW);
+    analogWrite(pins_motorB[0], motorB_val);
+    digitalWrite(pins_motorB[1], LOW);
   }
   else
   {
-    analogWrite(PIN_PWM_3_MOTOR_B, BRAKE_MOTOR_B);
-    analogWrite(PIN_PWM_4_MOTOR_B, BRAKE_MOTOR_B);
+    analogWrite(pins_motorB[0], BRAKE_MOTOR_B);
+    analogWrite(pins_motorB[1], BRAKE_MOTOR_B);
   }
   //Serial.println(motorB_val);
 }
@@ -298,15 +275,17 @@ void motor_control()
 //*********************************************************************************************************************
 // Program setup
 //*********************************************************************************************************************
+byte retry_delay = (rc_channels * 3) / 7;
+
 void setup()
 {
   //Serial.begin(9600);
   //printf_begin(); // Print the radio debug info
   
-  pinMode(PIN_PWM_1_MOTOR_A, OUTPUT);
-  pinMode(PIN_PWM_2_MOTOR_A, OUTPUT);
-  pinMode(PIN_PWM_3_MOTOR_B, OUTPUT);
-  pinMode(PIN_PWM_4_MOTOR_B, OUTPUT);
+  pinMode(pins_motorA[0], OUTPUT);
+  pinMode(pins_motorA[1], OUTPUT);
+  pinMode(pins_motorB[0], OUTPUT);
+  pinMode(pins_motorB[1], OUTPUT);
   
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_BATTERY, INPUT);
@@ -315,16 +294,16 @@ void setup()
   attach_servo_pins();
   
   // Setting the motor frequency
-  setPWMPrescaler(PIN_PWM_1_MOTOR_A, PWM_MOTOR_A);
-  setPWMPrescaler(PIN_PWM_3_MOTOR_B, PWM_MOTOR_B);
+  setPWMPrescaler(pins_motorA[0], PWM_MOTOR_A);
+  setPWMPrescaler(pins_motorB[0], PWM_MOTOR_B);
   
   // Define the radio communication
   radio.begin();
   radio.setAutoAck(1);
   radio.enableAckPayload();
   radio.enableDynamicPayloads();
-  radio.setRetries(0, 0);
-  radio.setChannel(RADIO_CHANNEL);
+  radio.setRetries(retry_delay, 0);
+  radio.setChannel(RF_CHANNEL);
   radio.setDataRate(RF24_250KBPS);
   radio.setPALevel(RF24_PA_MIN); // RF24_PA_MIN (-18dBm), RF24_PA_LOW (-12dBm), RF24_PA_HIGH (-6dbm), RF24_PA_MAX (0dBm)
   radio.openReadingPipe(1, address);
@@ -357,7 +336,7 @@ void send_and_receive_data()
 {
   if (radio.available())
   {
-    radio.read(&rc_packet, sizeof(rc_packet_size));
+    radio.read(&rc_packet, rc_packet_size);
     
     radio.writeAckPayload(1, &telemetry_packet, sizeof(telemetry_packet_size));
     
