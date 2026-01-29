@@ -1,4 +1,4 @@
-# RC receiver 2ch (motor driver, telemetry, laps transponder)
+# RC receiver 2 channels (laps transponder)
 Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
@@ -25,6 +25,8 @@ Includes a CMT2150A transponder for a custom RF lap reader.
 
 ## Arduino pins
 ```
+Motor pins:
+Number of motor as needed (possible combination of PWM pins and frequency, max 2)
 D9  - pwm1/MotorA
 D10 - pwm2/MotorA
 D3  - pwm3/MotorB
