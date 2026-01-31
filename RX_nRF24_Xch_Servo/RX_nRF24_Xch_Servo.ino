@@ -2,9 +2,9 @@
   ***********************************************************************************************************************
   RC receiver 1 to 12 servo channels
   **********************************
-  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs and telemetry.
+  RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_Xch_Servo
   
-  Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_Xch_Servo
+  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs and telemetry.
   
   Works with RC transmitters:
   TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED

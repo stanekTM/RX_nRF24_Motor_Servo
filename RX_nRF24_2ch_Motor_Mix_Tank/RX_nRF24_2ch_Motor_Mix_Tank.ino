@@ -2,9 +2,9 @@
   *******************************************************************************************************************************
   RC receiver 2 channels (mix tank-arcade motor driver)
   *****************************************************
-  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control and telemetry.
+  RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor_Mix_Tank
   
-  Simple RC receiver from my repository https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor_Mix_Tank
+  Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control and telemetry.
   
   Works with RC transmitters:
   TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
