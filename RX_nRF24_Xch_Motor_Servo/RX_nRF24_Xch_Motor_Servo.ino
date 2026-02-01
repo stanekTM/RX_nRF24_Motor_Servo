@@ -45,7 +45,7 @@ const byte address[] = "jirka";
 #define MAX_FORW_MOTOR_B  255
 #define MAX_BACK_MOTOR_B  255
 
-// Brake setting, no brake 0, max. brake 255. Settings (0-255)
+// Brake setting, no brake 0, maximum brake 255. Settings (0-255)
 #define BRAKE_MOTOR_A  0
 #define BRAKE_MOTOR_B  0
 
