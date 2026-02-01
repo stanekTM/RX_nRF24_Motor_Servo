@@ -25,7 +25,7 @@ The option to adjust the brake is included in the code.
 ## Arduino pins
 ```
 Servo pins:
-Number of servos as needed (possible combination, max 8)
+Number of servos as needed (possible combination, max. 8)
 D2  - servo 1
 D4  - servo 2
 D7  - servo 3

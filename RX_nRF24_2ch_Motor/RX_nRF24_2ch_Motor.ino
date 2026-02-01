@@ -27,7 +27,7 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
-// Setting the number of motor A and B channels (max 2)
+// Setting the number of motor A and B channels (max. 2)
 #define RC_CHANNELS  2
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
@@ -41,7 +41,7 @@ const byte address[] = "jirka";
 #define MAX_FORW_MOTOR_B  255
 #define MAX_BACK_MOTOR_B  255
 
-// Brake setting, no brake 0, max brake 255. Settings (0-255)
+// Brake setting, no brake 0, max. brake 255. Settings (0-255)
 #define BRAKE_MOTOR_A  0
 #define BRAKE_MOTOR_B  0
 
@@ -131,10 +131,10 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// PWM pins for motor A (possible combination, max 2)
+// PWM pins for motor A (possible combination, max. 2)
 const byte pins_motorA[] = {9, 10};
 
-// PWM pins for motor B (possible combination, max 2)
+// PWM pins for motor B (possible combination, max. 2)
 const byte pins_motorB[] = {3, 11};
 
 // LED alarm
@@ -156,7 +156,7 @@ const byte pins_motorB[] = {3, 11};
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// Received data array (max 32 bytes)
+// Received data array (max. 32 bytes)
 //*********************************************************************************************************************
 unsigned int rc_packet[RC_CHANNELS] = {1500};
 byte rc_packet_size = RC_CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)

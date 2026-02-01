@@ -27,7 +27,7 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
-// Setting the number of channels (max 12)
+// Setting the number of servo channels (max. 12)
 #define RC_CHANNELS  12
 
 // Alarm voltage setting
@@ -65,7 +65,7 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// Pins for servos (possible combination, max 12)
+// Pins for servos (possible combination, max. 12)
 const byte pins_servo[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
 // LED alarm
@@ -87,7 +87,7 @@ const byte pins_servo[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// Received data array (max 32 bytes)
+// Received data array (max. 32 bytes)
 //*********************************************************************************************************************
 unsigned int rc_packet[RC_CHANNELS] = {1500};
 byte rc_packet_size = RC_CHANNELS * 2; // For one control channel with a value of 1000 to 2000 we need 2 bytes(packets)

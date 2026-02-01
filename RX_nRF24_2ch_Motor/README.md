@@ -26,7 +26,7 @@ Includes a CMT2150A transponder for a custom RF lap reader.
 ## Arduino pins
 ```
 Motor pins:
-Number of motor as needed (possible combination of PWM pins and frequency, max 2)
+Number of motor as needed (possible combination of PWM pins and frequency, max. 2)
 D9  - pwm1/MotorA
 D10 - pwm2/MotorA
 D3  - pwm3/MotorB

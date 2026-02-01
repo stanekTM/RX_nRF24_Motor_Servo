@@ -28,10 +28,10 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
-// Setting the number of motor A and B channels (max 2)
+// Setting the number of motor A and B channels (max. 2)
 #define MOTOR_CHANNELS  2
 
-// Setting the number of servo channels (max 8)
+// Setting the number of servo channels (max. 8)
 #define SERVO_CHANNELS  8
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
@@ -45,7 +45,7 @@ const byte address[] = "jirka";
 #define MAX_FORW_MOTOR_B  255
 #define MAX_BACK_MOTOR_B  255
 
-// Brake setting, no brake 0, max brake 255. Settings (0-255)
+// Brake setting, no brake 0, max. brake 255. Settings (0-255)
 #define BRAKE_MOTOR_A  0
 #define BRAKE_MOTOR_B  0
 
@@ -135,13 +135,13 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// PWM pins for motor A (possible combination, max 2)
+// PWM pins for motor A (possible combination, max. 2)
 const byte pins_motorA[] = {5, 6};
 
-// PWM pins for motor B (possible combination, max 2)
+// PWM pins for motor B (possible combination, max. 2)
 const byte pins_motorB[] = {3, 11};
 
-// Pins for servos (possible combination, max 8)
+// Pins for servos (possible combination, max. 8)
 const byte pins_servo[] = {2, 4, 7, 8, 9, 10, 12, 13};
 
 // LED alarm
@@ -163,7 +163,7 @@ const byte pins_servo[] = {2, 4, 7, 8, 9, 10, 12, 13};
 RF24 radio(PIN_CE, PIN_CSN);
 
 //*********************************************************************************************************************
-// Received data array (max 32 bytes)
+// Received data array (max. 32 bytes)
 //*********************************************************************************************************************
 const byte rc_channels = MOTOR_CHANNELS + SERVO_CHANNELS;
 

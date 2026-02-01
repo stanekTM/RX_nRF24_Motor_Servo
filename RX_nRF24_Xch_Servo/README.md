@@ -19,7 +19,7 @@ Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM servo outputs
 ## Arduino pins
 ```
 Servo pins:
-Number of servos as needed (possible combination, max 12)
+Number of servos as needed (possible combination, max. 12)
 D2 - D13
 
 A5  - LED
