@@ -2,7 +2,6 @@
 Includes nRF24L01+ transceiver and ATmega328P/PB processor for PWM motor control or servo outputs and telemetry.
 
 The motor driver IC is based on MX1208, MX1508, MX1515, MX1616, MX1919 and others similar, which uses 4x PWM input control signals.
-The option to adjust the brake is included in the code.
 
 ### Receiver specification:
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
@@ -15,32 +14,28 @@ The option to adjust the brake is included in the code.
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
 ## Function
-* Adjustable PWM of motor A and B
+* Adjustable PWM of motor 1 and 2
 * Brake on, off or adjustable effect 
 * Normal mode, LED is lit
 * If the RX battery is low, the LED blink at 0.3s interval
 * If we lose RF data for 1 second, the LED blink at 0.1s interval
-* Fail-safe - motor A and B stop, servos 1 -> 8 set to neutral or individually set in code
+* Fail-safe - motor 1 and 2 stop, servos 1 -> 8 set to neutral or individually set in code
 
 ## Arduino pins
 ```
 Servo pins:
-Number of servos as needed (possible combination, max. 8)
 D2  - servo 1
+D3  - motor 2/1
 D4  - servo 2
+D5  - motor 1/1
+D6  - motor 1/2
 D7  - servo 3
 D8  - servo 4
 D9  - servo 5
 D10 - servo 6
+D11 - motor 2/2
 D12 - servo 7
 D13 - servo 8
-
-Motor pins:
-Number of motor as needed (possible combination of PWM pins and frequency, max 2)
-D5  - pwm1/MotorA
-D6  - pwm2/MotorA
-D3  - pwm3/MotorB
-D11 - pwm4/MotorB
 
 A5  - LED
 A7  - telemetry analog input RX battery

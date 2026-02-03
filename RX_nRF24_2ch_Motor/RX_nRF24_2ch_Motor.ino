@@ -27,23 +27,23 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
-// Setting the number of motor A and B channels (max. 2)
+// Setting the number of motor 1 and 2 channels (max. 2)
 #define RC_CHANNELS  2
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
-#define ACCELERATE_MOTOR_A  0
-#define ACCELERATE_MOTOR_B  0
+#define ACCELERATE_MOTOR1  0
+#define ACCELERATE_MOTOR2  0
 
 // Setting the maximum motor power. Suitable for TX transmitters without endpoint setting. Settings (0-255)
-#define MAX_FORW_MOTOR_A  255
-#define MAX_BACK_MOTOR_A  255
+#define MAX_FORW_MOTOR1  255
+#define MAX_BACK_MOTOR1  255
 
-#define MAX_FORW_MOTOR_B  255
-#define MAX_BACK_MOTOR_B  255
+#define MAX_FORW_MOTOR2  255
+#define MAX_BACK_MOTOR2  255
 
 // Brake setting, no brake 0, maximum brake 255. Settings (0-255)
-#define BRAKE_MOTOR_A  0
-#define BRAKE_MOTOR_B  0
+#define BRAKE_MOTOR1  0
+#define BRAKE_MOTOR2  0
 
 // Alarm voltage setting
 #define BATTERY_VOLTAGE    4.2  // Maximum nominal battery voltage
@@ -64,7 +64,7 @@ const byte address[] = "jirka";
 // 64 = 976Hz(default)
 // 8 = 7812Hz
 // 1 = 62500Hz
-//#define PWM_MOTOR_A  64
+//#define PWM_MOTOR1  64
 
 // Pin D9 and D10 (16-bit Timer/Counter 1, Servo library)
 // 1024 = 30Hz
@@ -72,7 +72,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-#define PWM_MOTOR_A  64
+#define PWM_MOTOR1  64
 
 // Pin D3 and D11 (8-bit Timer/Counter 2, ServoTimer2, Tone library)
 // 1024 = 30Hz
@@ -82,7 +82,7 @@ const byte address[] = "jirka";
 // 32 = 976Hz
 // 8 = 3906Hz
 // 1 = 31250Hz
-#define PWM_MOTOR_B  64
+#define PWM_MOTOR2  64
 
 // Pin D0(RX) (328PB 16-bit Timer/Counter 3)
 // 1024 = 30Hz
@@ -90,7 +90,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-//#define PWM_MOTOR_A  64
+//#define PWM_MOTOR1  64
 
 // Pin D1(TX) and D2 (328PB 16-bit Timer/Counter 4)
 // 1024 = 30Hz
@@ -98,7 +98,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-//#define PWM_MOTOR_B  64
+//#define PWM_MOTOR2  64
 
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB
@@ -131,11 +131,11 @@ const byte address[] = "jirka";
 // ADC6   -    A6
 // ADC7   -    A7
 
-// PWM pins for motor A (possible combination, max. 2)
-const byte pins_motorA[] = {9, 10};
+// PWM pins for motor 1 (possible combination, max. 2)
+const byte pins_motor1[] = {9, 10};
 
-// PWM pins for motor B (possible combination, max. 2)
-const byte pins_motorB[] = {3, 11};
+// PWM pins for motor 2 (possible combination, max. 2)
+const byte pins_motor2[] = {3, 11};
 
 // LED alarm
 #define PIN_LED            2
@@ -175,55 +175,55 @@ telemetry_packet_size telemetry_packet;
 //*********************************************************************************************************************
 // Motor control
 //*********************************************************************************************************************
-int motorA_val = 0, motorB_val = 0;
+int motor1_val = 0, motor2_val = 0;
 
 void motor_control()
 {
-  // Forward motor A
+  // Forward motor 1
   if (rc_packet[0] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorA_val = map(rc_packet[0], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_FORW_MOTOR_A);
-    analogWrite(pins_motorA[1], motorA_val); 
-    digitalWrite(pins_motorA[0], LOW);
+    motor1_val = map(rc_packet[0], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR1, MAX_FORW_MOTOR1);
+    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_FORW_MOTOR1);
+    analogWrite(pins_motor1[1], motor1_val); 
+    digitalWrite(pins_motor1[0], LOW);
   }
-  // Back motor A
+  // Back motor 1
   else if (rc_packet[0] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorA_val = map(rc_packet[0], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    motorA_val = constrain(motorA_val, ACCELERATE_MOTOR_A, MAX_BACK_MOTOR_A);
-    analogWrite(pins_motorA[0], motorA_val);
-    digitalWrite(pins_motorA[1], LOW);
+    motor1_val = map(rc_packet[0], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR1, MAX_BACK_MOTOR1);
+    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_BACK_MOTOR1);
+    analogWrite(pins_motor1[0], motor1_val);
+    digitalWrite(pins_motor1[1], LOW);
   }
   else
   {
-    analogWrite(pins_motorA[0], BRAKE_MOTOR_A);
-    analogWrite(pins_motorA[1], BRAKE_MOTOR_A);
+    analogWrite(pins_motor1[0], BRAKE_MOTOR1);
+    analogWrite(pins_motor1[1], BRAKE_MOTOR1);
   }
-  //Serial.println(motorA_val);
+  //Serial.println(motor1_val);
   
-  // Forward motor B
+  // Forward motor 2
   if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motorB_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_FORW_MOTOR_B);
-    analogWrite(pins_motorB[1], motorB_val);
-    digitalWrite(pins_motorB[0], LOW);
+    motor2_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, ACCELERATE_MOTOR2, MAX_FORW_MOTOR2);
+    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_FORW_MOTOR2);
+    analogWrite(pins_motor2[1], motor2_val);
+    digitalWrite(pins_motor2[0], LOW);
   }
-  // Back motor B
+  // Back motor 2
   else if (rc_packet[1] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motorB_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    motorB_val = constrain(motorB_val, ACCELERATE_MOTOR_B, MAX_BACK_MOTOR_B);
-    analogWrite(pins_motorB[0], motorB_val);
-    digitalWrite(pins_motorB[1], LOW);
+    motor2_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, ACCELERATE_MOTOR2, MAX_BACK_MOTOR2);
+    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_BACK_MOTOR2);
+    analogWrite(pins_motor2[0], motor2_val);
+    digitalWrite(pins_motor2[1], LOW);
   }
   else
   {
-    analogWrite(pins_motorB[0], BRAKE_MOTOR_B);
-    analogWrite(pins_motorB[1], BRAKE_MOTOR_B);
+    analogWrite(pins_motor2[0], BRAKE_MOTOR2);
+    analogWrite(pins_motor2[1], BRAKE_MOTOR2);
   }
-  //Serial.println(motorB_val);
+  //Serial.println(motor2_val);
 }
 
 //*********************************************************************************************************************
@@ -245,10 +245,10 @@ void setup()
   //Serial.begin(9600);
   //printf_begin(); // Print the radio debug info
   
-  pinMode(pins_motorA[0], OUTPUT);
-  pinMode(pins_motorA[1], OUTPUT);
-  pinMode(pins_motorB[0], OUTPUT);
-  pinMode(pins_motorB[1], OUTPUT);
+  pinMode(pins_motor1[0], OUTPUT);
+  pinMode(pins_motor1[1], OUTPUT);
+  pinMode(pins_motor2[0], OUTPUT);
+  pinMode(pins_motor2[1], OUTPUT);
   
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_BATTERY, INPUT);
@@ -256,8 +256,8 @@ void setup()
   fail_safe();
   
   // Setting the motor frequency
-  setPWMPrescaler(pins_motorA[0], PWM_MOTOR_A);
-  setPWMPrescaler(pins_motorB[0], PWM_MOTOR_B);
+  setPWMPrescaler(pins_motor1[0], PWM_MOTOR1);
+  setPWMPrescaler(pins_motor2[0], PWM_MOTOR2);
   
   // Define the radio communication
   radio.begin();
