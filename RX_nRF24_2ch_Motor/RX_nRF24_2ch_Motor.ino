@@ -27,8 +27,11 @@ const byte address[] = "jirka";
 // RF communication channel setting (0-125, 2.4Ghz + 76 = 2.476Ghz)
 #define RF_CHANNEL  76
 
-// Setting the number of motor 1 and 2 channels (max. 2)
-#define RC_CHANNELS  2
+//*********************************************************************************************************************
+// Option "//" if you want 1 motor output
+//*********************************************************************************************************************
+#define MOTOR1
+#define MOTOR2
 
 // Setting the reaction of the motor to be rotated after the lever has been moved. Settings (0-255)
 #define ACCELERATE_MOTOR1  0
@@ -57,6 +60,9 @@ const byte address[] = "jirka";
 #define MID_CONTROL_VAL  1500
 #define MAX_CONTROL_VAL  2000
 
+// The minimum number of channels that must be included in a packet
+#define RC_CHANNELS  2
+
 // Setting PWM
 // Pin D5 and D6 (8-bit Timer/Counter 0, functions delay, millis, micros and delayMicroseconds)
 // 1024 = 61Hz
@@ -64,7 +70,7 @@ const byte address[] = "jirka";
 // 64 = 976Hz(default)
 // 8 = 7812Hz
 // 1 = 62500Hz
-//#define PWM_MOTOR1  64
+//#define PWM_TIMER0_5_6  64
 
 // Pin D9 and D10 (16-bit Timer/Counter 1, Servo library)
 // 1024 = 30Hz
@@ -72,7 +78,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-#define PWM_MOTOR1  64
+#define PWM_TIMER1_9_10  64
 
 // Pin D3 and D11 (8-bit Timer/Counter 2, ServoTimer2, Tone library)
 // 1024 = 30Hz
@@ -82,7 +88,7 @@ const byte address[] = "jirka";
 // 32 = 976Hz
 // 8 = 3906Hz
 // 1 = 31250Hz
-#define PWM_MOTOR2  64
+#define PWM_TIMER2_3_11  64
 
 // Pin D0(RX) (328PB 16-bit Timer/Counter 3)
 // 1024 = 30Hz
@@ -90,7 +96,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-//#define PWM_MOTOR1  64
+//#define PWM_TIMER3_0  64
 
 // Pin D1(TX) and D2 (328PB 16-bit Timer/Counter 4)
 // 1024 = 30Hz
@@ -98,7 +104,7 @@ const byte address[] = "jirka";
 // 64 = 488Hz(default)
 // 8 = 3906Hz
 // 1 = 31250Hz
-//#define PWM_MOTOR2  64
+//#define PWM_TIMER4_1_2  64
 
 // ATmega328P/PB pins overview
 // PD0 - D0   PWM  328PB
@@ -132,13 +138,17 @@ const byte address[] = "jirka";
 // ADC7   -    A7
 
 // PWM pins for motor 1 (possible combination, max. 2)
+#if defined(MOTOR1)
 const byte pins_motor1[] = {9, 10};
+#endif
 
 // PWM pins for motor 2 (possible combination, max. 2)
+#if defined(MOTOR2)
 const byte pins_motor2[] = {3, 11};
+#endif
 
 // LED alarm
-#define PIN_LED            2
+#define PIN_LED            13 // My PCB pin 2
 
 // Input battery
 #define PIN_BATTERY        A7
@@ -179,6 +189,7 @@ int motor1_val = 0, motor2_val = 0;
 
 void motor_control()
 {
+#if defined(MOTOR1)
   // Forward motor 1
   if (rc_packet[0] > MID_CONTROL_VAL + DEAD_ZONE)
   {
@@ -201,7 +212,9 @@ void motor_control()
     analogWrite(pins_motor1[1], BRAKE_MOTOR1);
   }
   //Serial.println(motor1_val);
-  
+#endif
+
+#if defined(MOTOR2)
   // Forward motor 2
   if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
   {
@@ -224,6 +237,7 @@ void motor_control()
     analogWrite(pins_motor2[1], BRAKE_MOTOR2);
   }
   //Serial.println(motor2_val);
+#endif
 }
 
 //*********************************************************************************************************************
@@ -245,19 +259,22 @@ void setup()
   //Serial.begin(9600);
   //printf_begin(); // Print the radio debug info
   
+#if defined(MOTOR1)
   pinMode(pins_motor1[0], OUTPUT);
   pinMode(pins_motor1[1], OUTPUT);
+  setPWMPrescaler(pins_motor1[0], PWM_TIMER1_9_10); // Setting the motor 1 frequency
+#endif
+
+#if defined(MOTOR2)
   pinMode(pins_motor2[0], OUTPUT);
   pinMode(pins_motor2[1], OUTPUT);
+  setPWMPrescaler(pins_motor2[0], PWM_TIMER2_3_11); // Setting the motor 2 frequency
+#endif
   
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_BATTERY, INPUT);
   
   fail_safe();
-  
-  // Setting the motor frequency
-  setPWMPrescaler(pins_motor1[0], PWM_MOTOR1);
-  setPWMPrescaler(pins_motor2[0], PWM_MOTOR2);
   
   // Define the radio communication
   radio.begin();
