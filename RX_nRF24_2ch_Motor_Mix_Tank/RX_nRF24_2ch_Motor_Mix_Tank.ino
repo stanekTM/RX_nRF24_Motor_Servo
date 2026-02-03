@@ -36,11 +36,11 @@ const byte address[] = "jirka";
 
 // Setting the maximum motor power in individual modes. Suitable, for example, when the motors
 // powers are not the same and it is necessary to achieve straight driving. Settings (0-255)
-#define MAX_FORW_MOTOR1  255
-#define MAX_BACK_MOTOR1  255
+#define MAX_FORWARD_MOTOR1  255
+#define MAX_REVERSE_MOTOR1  255
 
-#define MAX_FORW_MOTOR2  255
-#define MAX_BACK_MOTOR2  255
+#define MAX_FORWARD_MOTOR2  255
+#define MAX_REVERSE_MOTOR2  255
 
 // Brake setting, no brake 0, maximum brake 255. Settings (0-255)
 #define BRAKE_MOTOR1  255
@@ -191,17 +191,17 @@ void motor_control()
   // Forward motor 1
   if (mix1 > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motor1_val = map(mix1, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR1, MAX_FORW_MOTOR1);
-    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_FORW_MOTOR1);
+    motor1_val = map(mix1, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR1, MAX_FORWARD_MOTOR1);
+    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_FORWARD_MOTOR1);
     analogWrite(pins_motor1[1], motor1_val); 
     digitalWrite(pins_motor1[0], LOW);
     //Serial.println(motor1_val);
   }
-  // Back motor 1
+  // Reverse motor 1
   else if (mix1 < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motor1_val = map(mix1, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR1, MAX_BACK_MOTOR1);
-    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_BACK_MOTOR1);
+    motor1_val = map(mix1, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR1, MAX_REVERSE_MOTOR1);
+    motor1_val = constrain(motor1_val, ACCELERATE_MOTOR1, MAX_REVERSE_MOTOR1);
     analogWrite(pins_motor1[0], motor1_val);
     digitalWrite(pins_motor1[1], LOW);
     //Serial.println(motor1_val);
@@ -216,17 +216,17 @@ void motor_control()
   // Forward motor 2
   if (mix2 > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motor2_val = map(mix2, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR2, MAX_FORW_MOTOR2);
-    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_FORW_MOTOR2);
+    motor2_val = map(mix2, MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL - calc_mix, ACCELERATE_MOTOR2, MAX_FORWARD_MOTOR2);
+    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_FORWARD_MOTOR2);
     analogWrite(pins_motor2[1], motor2_val);
     digitalWrite(pins_motor2[0], LOW);
     //Serial.println(motor2_val);
   }
-  // Back motor 2
+  // Reverse motor 2
   else if (mix2 < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motor2_val = map(mix2, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR2, MAX_BACK_MOTOR2);
-    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_BACK_MOTOR2);
+    motor2_val = map(mix2, MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL + calc_mix, ACCELERATE_MOTOR2, MAX_REVERSE_MOTOR2);
+    motor2_val = constrain(motor2_val, ACCELERATE_MOTOR2, MAX_REVERSE_MOTOR2);
     analogWrite(pins_motor2[0], motor2_val);
     digitalWrite(pins_motor2[1], LOW);
     //Serial.println(motor2_val);
