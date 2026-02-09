@@ -7,28 +7,67 @@ Telemetry sends measured voltage and "fake" RSSI (the nRF24L01+ transceiver does
 
 The code is Arduino.
 
-### Receiver specification:
-* Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
-* Working current of the motor driver MX1508: 1.5A (peak current up to 2.5A)
-
-### Works with RC transmitters:
+### Works with RC transmitters
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_Xch_LED**](https://github.com/stanekTM/TX_nRF24_Xch_LED)
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
-## Micro RC receiver [(motor driver, telemetry, laps transponder)](https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor)
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="640"></a>
+### Receiver specification
+* Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
+* Working current of the motor driver MX1508: 1.5A (peak current up to 2.5A)
 
-[The schematic](https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_schema.PNG) and [PCB](https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_layout.PNG) is created by a custom version of the open source [PCB Elegance](https://github.com/stanekTM/PCB_Elegance) and manufactured by [JLCPCB](https://jlcpcb.com)
+### Receiver configuration in the "Config.h" file
+* Setting a unique address (5 bytes number or character)
+* RF communication channel setting
+* Setting the maximum nominal battery voltage
+* Setting the minimum battery voltage for alarm
+* Servo and motor output selection
+* Setting the number of servo channels
+* Setting the motor reaction point. Prevents initial rotor magnetic resistance
+* Setting the maximum motor power
+* Brake setting
 
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_2.jpg" width="415">
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_3.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_4.jpg" width="415">
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_5.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_6.jpg" width="415">
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/micro_rx_7.jpg" width="415">
+### LED mode
+* Normal mode, LED is lit
+* If the RX battery is low, the LED blink at 0.3s interval
+* If we lose RF data for 1 second, the LED blink at 0.1s interval (fail-safe)
 
-## RC receiver prototype [(motor and servo driver, telemetry)](https://youtu.be/jPN5YdQ-3K0?si=AT5yUzox_M3fIWEb)
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_motor_servo_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_motor_servo_2.jpg" width="415">
+### Arduino pins
+```
+Servo pins:
+D2  - servo 1
+D3  - servo 2/motor 2/1
+D4  - servo 3
+D5  - servo 4/motor 1/1
+D6  - servo 5/motor 1/2
+D7  - servo 6
+D8  - servo 7
+D9  - servo 8
+D10 - servo 9
+D11 - servo 10/motor 2/2
+D12 - servo 11
+D13 - servo 12
 
-## RC receiver prototype [(mix tank-arcade motor driver, telemetry)](https://github.com/stanekTM/RX_nRF24_Motor_Servo/tree/master/RX_nRF24_2ch_Motor_Mix_Tank)
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_mix_tank_arcade_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Motor_Servo/master/documents/rx_prototype_mix_tank_arcade_2.jpg" width="415"><a href="https://youtu.be/AYgY5UkVnUM"><img src="https://github.com/stanekTM/RX_nRF24_Motor_Servo/blob/master/documents/rx_prototype_mix_tank_arcade_youtube.PNG" width="415"></a>
+A5  - LED
+A7  - telemetry analog input RX battery
+
+nRF24L01+:
+A0  - CE
+A1  - CSN
+software SPI:
+A2  - SCK
+A3  - MOSI
+A4  - MISO
+```
+### Micro RC receiver
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="415"></a>
+
+<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_2.jpg" width="415">
+<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_3.jpg" width="415">
+
+### RC receiver with tank-arcade mix
+<a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
+
+### RC receiver with servo
+<a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.PNG" width="415"></a>
