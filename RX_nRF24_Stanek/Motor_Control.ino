@@ -7,13 +7,17 @@ void motor_setup()
 #if defined(MOTOR1)
   pinMode(pins_motor1[0], OUTPUT);
   pinMode(pins_motor1[1], OUTPUT);
-  setPWMPrescaler(pins_motor1[0], PWM_976HZ_TIMER0_5_6_DEFAULT); // Setting the motor 1 frequency
+#if defined(PIN_9_10_MOTOR1)
+  setPWMPrescaler(pins_motor1[0], PWM_122HZ_TIMER1_9_10);
+#else
+  setPWMPrescaler(pins_motor1[0], PWM_976HZ_TIMER0_5_6_DEFAULT);
+#endif
 #endif
 
 #if defined(MOTOR2)
   pinMode(pins_motor2[0], OUTPUT);
   pinMode(pins_motor2[1], OUTPUT);
-  setPWMPrescaler(pins_motor2[0], PWM_122HZ_TIMER2_3_11); // Setting the motor 2 frequency
+  setPWMPrescaler(pins_motor2[0], PWM_122HZ_TIMER2_3_11);
 #endif
 }
 
