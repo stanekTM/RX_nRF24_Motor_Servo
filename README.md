@@ -25,7 +25,7 @@ The code is Arduino.
 * Servo and motor output selection
 * Setting the number of servo channels
 * Setting the motor reaction point. Prevents initial rotor magnetic resistance
-* Setting the maximum motor power
+* Setting the maximum motor power. Suitable for RC transmitters without endpoint setting
 * Brake setting
 
 ### LED mode
