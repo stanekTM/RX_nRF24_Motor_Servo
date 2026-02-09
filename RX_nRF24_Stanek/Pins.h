@@ -39,8 +39,12 @@
 // ADC7   -    A7
 
 // PWM pins for motor 1 (possible combination, max. 2)
+#if defined(PIN_9_10_MOTOR1)
+  const byte pins_motor1[2] = {9, 10};
+#else
 #if defined(MOTOR1) || defined(MIX_TANK_MOTOR1_2)
   const byte pins_motor1[2] = {5, 6};
+#endif
 #endif
 
 // PWM pins for motor 2 (possible combination, max. 2)
@@ -69,7 +73,10 @@
 #endif
 
 // LED alarm
-#define PIN_LED            A6
+#if defined(PIN_LED)
+  #else
+  #define PIN_LED          A6
+#endif
 
 // Input battery
 #define PIN_BATTERY        A7

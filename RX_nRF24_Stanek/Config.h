@@ -40,13 +40,16 @@
   
   Brake setting, no brake 0, maximum brake 255
   BRAKE_MOTOR1, BRAKE_MOTOR2  0 to 255
+  
+  // Pin settings specific to my PCB. Do not use unless you know what you are doing!
+  PIN_LED, PIN_9_10_MOTOR1
 */
 
 //*********************************************************************************************************************
 // Custom configuration for a specific RC model
 //*********************************************************************************************************************
-//#define BUGGY_1_32
-#define EACHINE_MONSTER
+#define BUGGY_1_32
+//#define EACHINE_MONSTER
 //#define LET_L13_BLANIK
 //#define FERARI_F40
 //#define SKODA_120L
@@ -67,6 +70,9 @@
   
   #define BATTERY_VOLTAGE  4.2
   #define MONITORED_VOLTAGE  3.45
+  
+  #define PIN_LED  2
+  #define PIN_9_10_MOTOR1
   
   #define MOTOR1
   #define REACTION_MOTOR1  0
@@ -98,8 +104,8 @@
   #define MAX_FORWARD_MOTOR2  255
   #define MAX_REVERSE_MOTOR1  255
   #define MAX_REVERSE_MOTOR2  255
-  #define BRAKE_MOTOR1  0
-  #define BRAKE_MOTOR2  0
+  #define BRAKE_MOTOR1  255
+  #define BRAKE_MOTOR2  255
 #endif
 
 // Glider Let L-13 Blanik
@@ -132,7 +138,7 @@
   #define REACTION_MOTOR1  0
   #define MAX_FORWARD_MOTOR1  255
   #define MAX_REVERSE_MOTOR1  255
-  #define BRAKE_MOTOR1  0
+  #define BRAKE_MOTOR1  255
 #endif
 
 // Skoda 120L
@@ -151,7 +157,7 @@
   #define REACTION_MOTOR2  0
   #define MAX_FORWARD_MOTOR2  255
   #define MAX_REVERSE_MOTOR2  255
-  #define BRAKE_MOTOR2  0
+  #define BRAKE_MOTOR2  255
 #endif
 
 // Tank T-34/85
@@ -173,8 +179,8 @@
   #define MAX_FORWARD_MOTOR2  255
   #define MAX_REVERSE_MOTOR1  255
   #define MAX_REVERSE_MOTOR2  255
-  #define BRAKE_MOTOR1  0
-  #define BRAKE_MOTOR2  0
+  #define BRAKE_MOTOR1  255
+  #define BRAKE_MOTOR2  255
 #endif
 
 // Default config motor 1 and 2
