@@ -62,8 +62,11 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a><img src="documents/2micro_rx_schema.png" width="415"><img src="documents/3micro_rx_top.jpg" width="415">
-<img src="documents/4micro_rx_bottom.jpg" width="415"><img src="documents/5micro_rx_opentx.jpg" width="415">
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a>
+<img src="documents/2micro_rx_schema.png" width="415">
+<img src="documents/3micro_rx_top.jpg" width="415">
+<img src="documents/4micro_rx_bottom.jpg" width="415">
+<img src="documents/5micro_rx_opentx.jpg" width="415">
 
 ### RC receiver with tank-arcade mix
 <a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
