@@ -62,13 +62,13 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.png" width="415"></a>
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a>
 
-<img src="documents/2micro_rx_schema.png" width="415"><img src="https://github.com/stanekTM/RX_nRF24_Stanek/blob/master/documents/3micro_rx_top.jpg" width="415">
+<img src="documents/2micro_rx_schema.PNG" width="415"><img src="https://github.com/stanekTM/RX_nRF24_Stanek/blob/master/documents/3micro_rx_top.jpg" width="415">
 <img src="https://github.com/stanekTM/RX_nRF24_Stanek/blob/master/documents/4micro_rx_bottom.jpg" width="415"><img src="https://github.com/stanekTM/RX_nRF24_Stanek/blob/master/documents/5micro_rx_opentx.jpg" width="415">
 
 ### RC receiver with tank-arcade mix
-<a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.png" width="415"></a>
+<a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
 
 ### RC receiver with servo
-<a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.png" width="415"></a>
+<a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.PNG" width="415"></a>
