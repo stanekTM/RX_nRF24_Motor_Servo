@@ -13,11 +13,11 @@ The code is Arduino.
 * [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
 * [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
 
-### Receiver specification
+### RC receiver specification
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 * Working current of the motor driver MX1508: 1.5A (peak current up to 2.5A)
 
-### Receiver configuration in the "Config.h" file
+### RC receiver configuration in the "Config.h" file
 * Setting a unique address (5 bytes number or character)
 * RF communication channel setting
 * Setting the maximum nominal battery voltage
@@ -30,7 +30,7 @@ The code is Arduino.
 
 ### LED mode
 * Normal mode, LED is lit
-* If the RX battery is low, the LED blink at 0.3s interval
+* If the RC receiver battery is low, the LED blink at 0.3s interval
 * If we lose RF data for 1 second, the LED blink at 0.1s interval (fail-safe)
 
 ### Arduino pins
