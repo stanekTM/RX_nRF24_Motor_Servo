@@ -17,7 +17,7 @@ The code is Arduino.
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 * Working current of the motor driver MX1508: 1.5A (peak current up to 2.5A)
 
-### RC receiver configuration in the "Config.h" file
+### RC receiver configuration manual in the "Config.h" file
 * Setting a unique address (5 bytes number or character)
 * RF communication channel setting
 * Setting the maximum nominal battery voltage
@@ -27,6 +27,7 @@ The code is Arduino.
 * Setting the motor reaction point. Prevents initial rotor magnetic resistance
 * Setting the maximum motor power. Suitable for RC transmitters without endpoint setting
 * Brake setting
+* Pin settings specific to my PCB. Do not use unless you know what you are doing!
 
 ### LED mode
 * Normal mode, LED is lit
@@ -61,10 +62,9 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="415"></a>
-
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_1.jpg" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_2.jpg" width="415">
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/micro_rx_3.jpg" width="415">
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a>
+<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/2micro_rx_schema.PNG" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/3micro_rx_top.JPG" width="415">
+<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/4micro_rx_bottom.JPG" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/5micro_rx_opentx.JPG" width="415">
 
 ### RC receiver with tank-arcade mix
 <a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
