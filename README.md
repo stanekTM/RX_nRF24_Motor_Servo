@@ -62,8 +62,7 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a>
-<img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/2micro_rx_schema.PNG" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/3micro_rx_top.JPG" width="415">
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/2micro_rx_schema.PNG" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/3micro_rx_top.JPG" width="415">
 <img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/4micro_rx_bottom.JPG" width="415"><img src="https://raw.githubusercontent.com/stanekTM/RX_nRF24_Stanek/master/documents/5micro_rx_opentx.JPG" width="415">
 
 ### RC receiver with tank-arcade mix
