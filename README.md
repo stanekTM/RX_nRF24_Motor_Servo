@@ -75,5 +75,5 @@ A4  - MISO
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AYgY5UkVnUM?si=YF3XMGJTFg1ziktR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-<iframe id="ytplayer" type="text/html" width="720" height="405"src="https://youtu.be/AYgY5UkVnUM?si=8jnHKtwW9bc1T8su" frameborder="0" allowfullscreen>
+<iframe id="ytplayer" type="text/html" width="720" height="405"src="https://youtu.be/AYgY5UkVnUM?si=8jnHKtwW9bc1T8su" frameborder="0" allowfullscreen></iframe>
 
