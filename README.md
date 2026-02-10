@@ -36,7 +36,6 @@ The code is Arduino.
 
 ### Arduino pins
 ```
-Servo pins:
 D2  - servo 1
 D3  - servo 2/motor 2/1
 D4  - servo 3
@@ -62,14 +61,12 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="415"></a>
-<img src="documents/2micro_rx_schema.png" width="415">
-<img src="documents/3micro_rx_top.jpg" width="415">
-<img src="documents/4micro_rx_bottom.jpg" width="415">
-<img src="documents/5micro_rx_opentx.jpg" width="415">
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="830"></a>
+<img src="documents/3micro_rx_top.jpg" width="415"><img src="documents/4micro_rx_bottom.jpg" width="415">
+<img src="documents/2micro_rx_schema.png" width="830"><img src="documents/5micro_rx_opentx.jpg" width="830">
 
 ### RC receiver with tank-arcade mix
-<a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
+<a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="830"></a>
 
 ### RC receiver with servo
-<a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.PNG" width="415"></a>
+<a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.PNG" width="830"></a>
