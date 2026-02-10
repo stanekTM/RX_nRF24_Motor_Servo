@@ -73,5 +73,3 @@ A4  - MISO
 
 ### RC receiver with servo
 <a href="https://youtu.be/jPN5YdQ-3K0"><img src="documents/rx_servo_motor_youtube.PNG" width="415"></a>
-
-[[RC receiver with servo](documents/rx_servo_motor_youtube.PNG)](https://youtu.be/jPN5YdQ-3K0)
