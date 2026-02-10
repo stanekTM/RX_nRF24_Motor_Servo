@@ -72,4 +72,4 @@ A4  - MISO
 <a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="415"></a>
 
 ### RC receiver with servo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AYgY5UkVnUM?si=8-wTd4ZCj7O8Dz_6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/AYgY5UkVnUM?si=8jnHKtwW9bc1T8su" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
