@@ -10,8 +10,9 @@ The code is Arduino.
 ### Works with RC transmitters
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_Xch_LED**](https://github.com/stanekTM/TX_nRF24_Xch_LED)
-* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)
-* [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork.
+* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev) <img src="documents/openavrc.png" width="260">
+
+* [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork. <img src="documents/opentx_multi.jpg" width="260">
 
 ### RC receiver specification
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
@@ -51,7 +52,7 @@ D11 - servo 10/ motor 3/2
 D12 - servo 11
 D13 - servo 12
 
-A5  - LED
+A6  - LED
 A7  - telemetry analog input RX battery
 
 nRF24L01+:

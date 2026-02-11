@@ -102,20 +102,20 @@
 //*********************************************************************************************************************
 // Pin D0(RX) (328PB 16-bit Timer/Counter 3)
 //*********************************************************************************************************************
-#define PWM_30HZ_TIMER3_0     1024
-#define PWM_122HZ_TIMER3_0    256
-#define PWM_488HZ_TIMER3_0_DEFAULT  64
-#define PWM_3906HZ_TIMER3_0   8
-#define PWM_31250HZ_TIMER3_0  1
+//#define PWM_30HZ_TIMER3_0     1024
+//#define PWM_122HZ_TIMER3_0    256
+//#define PWM_488HZ_TIMER3_0_DEFAULT  64
+//#define PWM_3906HZ_TIMER3_0   8
+//#define PWM_31250HZ_TIMER3_0  1
 
 //*********************************************************************************************************************
 // Pin D1(TX) and D2 (328PB 16-bit Timer/Counter 4)
 //*********************************************************************************************************************
-#define PWM_30HZ_TIMER4_1_2     1024
-#define PWM_122HZ_TIMER4_1_2    256
-#define PWM_488HZ_TIMER4_1_2_DEFAULT  64
-#define PWM_3906HZ_TIMER4_1_2   8
-#define PWM_31250HZ_TIMER4_1_2  1
+//#define PWM_30HZ_TIMER4_1_2     1024
+//#define PWM_122HZ_TIMER4_1_2    256
+//#define PWM_488HZ_TIMER4_1_2_DEFAULT  64
+//#define PWM_3906HZ_TIMER4_1_2   8
+//#define PWM_31250HZ_TIMER4_1_2  1
 
 //*********************************************************************************************************************
 // Set PWM prescaler

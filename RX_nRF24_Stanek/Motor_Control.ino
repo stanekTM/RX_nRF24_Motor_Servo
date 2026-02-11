@@ -58,17 +58,17 @@ void motor_control()
   int motor2_val = 0;
   
   // Forward motor 2
-  if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
+  if (rc_packet[0] > MID_CONTROL_VAL + DEAD_ZONE)
   {
-    motor2_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, REACTION_MOTOR2, MAX_FORWARD_MOTOR2);
+    motor2_val = map(rc_packet[0], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, REACTION_MOTOR2, MAX_FORWARD_MOTOR2);
     motor2_val = constrain(motor2_val, REACTION_MOTOR2, MAX_FORWARD_MOTOR2);
     analogWrite(pins_motor2[1], motor2_val);
     digitalWrite(pins_motor2[0], LOW);
   }
   // Reverse motor 2
-  else if (rc_packet[1] < MID_CONTROL_VAL - DEAD_ZONE)
+  else if (rc_packet[0] < MID_CONTROL_VAL - DEAD_ZONE)
   {
-    motor2_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, REACTION_MOTOR2, MAX_REVERSE_MOTOR2);
+    motor2_val = map(rc_packet[0], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, REACTION_MOTOR2, MAX_REVERSE_MOTOR2);
     motor2_val = constrain(motor2_val, REACTION_MOTOR2, MAX_REVERSE_MOTOR2);
     analogWrite(pins_motor2[0], motor2_val);
     digitalWrite(pins_motor2[1], LOW);

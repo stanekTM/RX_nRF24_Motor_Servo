@@ -21,11 +21,11 @@
   MONITORED_VOLTAGE  < 4.2
   
   Servo and motor output selection
+  SERVO_12CH          Separate servo outputs (2 to 12 servo channels)
   MOTOR1              Separate output for motor 1 with the option to add motor 2 and 3
   MOTOR2              Separate output for motor 2 with the option to add motor 1 and 3
   MOTOR3              Separate output for motor 3 with the option to add motor 1 and 2
   MIX_TANK_MOTOR2_3   Motor 2 and 3 with a "tank-arcade" output mix
-  SERVO_12CH          Separate servo outputs (2 to 12 servo channels)
   SERVO_10CH_MOTOR3   Servo and motor 3 output (1 to 10 servo channels)
   SERVO_8CH_MOTOR2_3  Servo, motor 2 and motor 3 output (1 to 8 servo channels)
   
@@ -35,7 +35,8 @@
   Setting the pins for the motors according to the requirements of the RC model
   PIN_5_6_MOTOR1, PIN_9_10_MOTOR2, PIN_3_11_MOTOR3
   
-  Setting the PWM prescaler according to the requirements and limitations of the timers/counters. Details in the "PWM" file
+  Setting the PWM prescaler according to the requirements and limitations of the timers/counters.
+  Details in the "PWM" file
   PWM_30HZ --> PWM_62500HZ
   
   Setting the motor reaction point. Prevents initial rotor magnetic resistance
@@ -54,11 +55,24 @@
 //*********************************************************************************************************************
 // Custom configuration for a specific RC model
 //*********************************************************************************************************************
+//#define LET_L13_BLANIK
 #define BUGGY_1_32
 //#define EACHINE_MONSTER
-//#define LET_L13_BLANIK
 //#define FERARI_F40
 //#define TANK_T34
+
+// Glider Let L-13 Blanik
+#if defined(LET_L13_BLANIK)
+  
+  const byte address[6] = "jirka";
+  #define RF_CHANNEL  76
+  
+  #define BATTERY_VOLTAGE  4.2
+  #define MONITORED_VOLTAGE  3.45
+  
+  #define SERVO_12CH
+  #define SERVO_CHANNELS  4
+#endif
 
 // Buggy 1:32
 #if defined(BUGGY_1_32)
@@ -112,19 +126,6 @@
   #define MAX_FORWARD_MOTOR3  255
   #define MAX_REVERSE_MOTOR3  255
   #define BRAKE_MOTOR3  255
-#endif
-
-// Glider Let L-13 Blanik
-#if defined(LET_L13_BLANIK)
-  
-  const byte address[6] = "jirka";
-  #define RF_CHANNEL  76
-  
-  #define BATTERY_VOLTAGE  4.2
-  #define MONITORED_VOLTAGE  3.45
-  
-  #define SERVO_12CH
-  #define SERVO_CHANNELS  4
 #endif
 
 // Ferari F-40
