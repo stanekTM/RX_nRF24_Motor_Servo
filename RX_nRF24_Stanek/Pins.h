@@ -5,9 +5,9 @@
 #include <Arduino.h>
 #include "Config.h"
 
-//*********************************************************************************************************************
+//*****************************
 // ATmega328P/PB pins overview
-//*********************************************************************************************************************
+//*****************************
 // PD0 - D0   PWM  328PB
 // PD1 - D1   PWM  328PB
 // PD2 - D2   PWM  328PB
@@ -39,17 +39,18 @@
 // ADC7   -    A7
 
 // PWM pins for motor 1 (possible combination, max. 2)
-#if defined(PIN_9_10_MOTOR1)
-  const byte pins_motor1[2] = {9, 10};
-#else
-#if defined(MOTOR1) || defined(MIX_TANK_MOTOR1_2)
+#if defined(PIN_5_6_MOTOR1)
   const byte pins_motor1[2] = {5, 6};
-#endif
 #endif
 
 // PWM pins for motor 2 (possible combination, max. 2)
-#if defined(MOTOR2) || defined(MIX_TANK_MOTOR1_2)
-  const byte pins_motor2[2] = {3, 11};
+#if defined(PIN_9_10_MOTOR2)
+  const byte pins_motor2[2] = {9, 10};
+#endif
+
+// PWM pins for motor 3 (possible combination, max. 2)
+#if defined(PIN_3_11_MOTOR3)
+  const byte pins_motor3[2] = {3, 11};
 #endif
 
 // Pins for servos (possible combination, max. 12)
@@ -58,18 +59,13 @@
 #endif
 
 // Pins for servos (possible combination, max. 10)
-#if defined(SERVO_10CH_MOTOR1)
-  const byte pins_servo[10] = {2, 3, 4, 7, 8, 9, 10, 11, 12, 13};
-#endif
-
-// Pins for servos (possible combination, max. 10)
-#if defined(SERVO_10CH_MOTOR2)
+#if defined(SERVO_10CH_MOTOR3)
   const byte pins_servo[10] = {2, 4, 5, 6, 7, 8, 9, 10, 12, 13};
 #endif
 
 // Pins for servos (possible combination, max. 8)
-#if defined(SERVO_8CH_MOTOR1_2)
-  const byte pins_servo[8] = {2, 4, 7, 8, 9, 10, 12, 13};
+#if defined(SERVO_8CH_MOTOR2_3)
+  const byte pins_servo[8] = {2, 4, 5, 6, 7, 8, 12, 13};
 #endif
 
 // LED alarm
