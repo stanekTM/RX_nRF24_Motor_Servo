@@ -25,7 +25,6 @@ The code is Arduino.
 * Setting the minimum battery voltage for alarm
 * Servo and motor output selection
 * Setting the number of servo channels
-* Setting the pins for the motors according to the requirements of the RC model
 * Setting the PWM prescaler according to the requirements and limitations of the timers/counters. Details in the "PWM" file
 * Setting the motor reaction point. Prevents initial rotor magnetic resistance
 * Setting the maximum motor power. Suitable for RC transmitters without endpoint setting
@@ -42,8 +41,8 @@ The code is Arduino.
 D2  - servo 1
 D3  - servo 2  - motor 3/1
 D4  - servo 3
-D5  - servo 4  - motor 1/1
-D6  - servo 5  - motor 1/2
+D5  - servo 4
+D6  - servo 5
 D7  - servo 6
 D8  - servo 7
 D9  - servo 8  - motor 2/1

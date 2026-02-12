@@ -8,7 +8,6 @@
 
 #include <Arduino.h>
 #include "Config.h"
-#include "Pins.h"
 
 //*********************************************************************************************************************
 // Pin D5 and D6 (8-bit Timer/Counter 0, functions delay, millis, micros and delayMicroseconds)
@@ -19,22 +18,20 @@
 //#define PWM_7812HZ_TIMER0_5_6
 //#define PWM_62500HZ_TIMER0_5_6
 
-#if defined(PIN_5_6_MOTOR1)
-  #if defined(PWM_61HZ_TIMER0_5_6)
-    #define PRESCALER_TIMER0_5_6  1024
-  #endif
-  #if defined(PWM_244HZ_TIMER0_5_6)
-    #define PRESCALER_TIMER0_5_6  256
-  #endif
-  #if defined(PWM_976HZ_TIMER0_5_6_DEFAULT)
-    #define PRESCALER_TIMER0_5_6  64
-  #endif
-  #if defined(PWM_7812HZ_TIMER0_5_6)
-    #define PRESCALER_TIMER0_5_6  8
-  #endif
-  #if defined(PWM_62500HZ_TIMER0_5_6)
-    #define PRESCALER_TIMER0_5_6  1
-  #endif
+#if defined(PWM_61HZ_TIMER0_5_6)
+  #define PRESCALER_TIMER0_5_6  1024
+#endif
+#if defined(PWM_244HZ_TIMER0_5_6)
+  #define PRESCALER_TIMER0_5_6  256
+#endif
+#if defined(PWM_976HZ_TIMER0_5_6_DEFAULT)
+  #define PRESCALER_TIMER0_5_6  64
+#endif
+#if defined(PWM_7812HZ_TIMER0_5_6)
+  #define PRESCALER_TIMER0_5_6  8
+#endif
+#if defined(PWM_62500HZ_TIMER0_5_6)
+  #define PRESCALER_TIMER0_5_6  1
 #endif
 
 //*********************************************************************************************************************
@@ -46,22 +43,20 @@
 //#define PWM_3906HZ_TIMER1_9_10
 //#define PWM_31250HZ_TIMER1_9_10
 
-#if defined(PIN_9_10_MOTOR2)
-  #if defined(PWM_30HZ_TIMER1_9_10)
-    #define PRESCALER_TIMER1_9_10  1024
-  #endif
-  #if defined(PWM_122HZ_TIMER1_9_10)
-    #define PRESCALER_TIMER1_9_10  256
-  #endif
-  #if defined(PWM_488HZ_TIMER1_9_10_DEFAULT)
-    #define PRESCALER_TIMER1_9_10  64
-  #endif
-  #if defined(PWM_3906HZ_TIMER1_9_10)
-    #define PRESCALER_TIMER1_9_10  8
-  #endif
-  #if defined(PWM_31250HZ_TIMER1_9_10)
-    #define PRESCALER_TIMER1_9_10  1
-  #endif
+#if defined(PWM_30HZ_TIMER1_9_10)
+  #define PRESCALER_TIMER1_9_10  1024
+#endif
+#if defined(PWM_122HZ_TIMER1_9_10)
+  #define PRESCALER_TIMER1_9_10  256
+#endif
+#if defined(PWM_488HZ_TIMER1_9_10_DEFAULT)
+  #define PRESCALER_TIMER1_9_10  64
+#endif
+#if defined(PWM_3906HZ_TIMER1_9_10)
+  #define PRESCALER_TIMER1_9_10  8
+#endif
+#if defined(PWM_31250HZ_TIMER1_9_10)
+  #define PRESCALER_TIMER1_9_10  1
 #endif
 
 //*********************************************************************************************************************
@@ -75,28 +70,26 @@
 //#define PWM_3906HZ_TIMER2_3_11   8
 //#define PWM_31250HZ_TIMER2_3_11  1
 
-#if defined(PIN_3_11_MOTOR3)
-  #if defined(PWM_30HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  1024
-  #endif
-  #if defined(PWM_122HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  256
-  #endif
-  #if defined(PWM_244HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  128
-  #endif
-  #if defined(PWM_488HZ_TIMER2_3_11_DEFAULT)
-    #define PRESCALER_TIMER2_3_11  64
-  #endif
-  #if defined(PWM_976HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  32
-  #endif
-  #if defined(PWM_3906HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  8
-  #endif
-  #if defined(PWM_31250HZ_TIMER2_3_11)
-    #define PRESCALER_TIMER2_3_11  1
-  #endif
+#if defined(PWM_30HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  1024
+#endif
+#if defined(PWM_122HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  256
+#endif
+#if defined(PWM_244HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  128
+#endif
+#if defined(PWM_488HZ_TIMER2_3_11_DEFAULT)
+  #define PRESCALER_TIMER2_3_11  64
+#endif
+#if defined(PWM_976HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  32
+#endif
+#if defined(PWM_3906HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  8
+#endif
+#if defined(PWM_31250HZ_TIMER2_3_11)
+  #define PRESCALER_TIMER2_3_11  1
 #endif
 
 //*********************************************************************************************************************
