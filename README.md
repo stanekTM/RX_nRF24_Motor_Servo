@@ -40,25 +40,25 @@ The code is Arduino.
 ### Arduino pins
 ```
 D2  - servo 1
-D3  - servo 2 / motor 3/1
+D3  - servo 2  - motor 3/1
 D4  - servo 3
-D5  - servo 4 / motor 1/1
-D6  - servo 5 / motor 1/2
+D5  - servo 4  - motor 1/1
+D6  - servo 5  - motor 1/2
 D7  - servo 6
 D8  - servo 7
-D9  - servo 8 / motor 2/1
-D10 - servo 9 / motor 2/2
-D11 - servo 10/ motor 3/2
+D9  - servo 8  - motor 2/1
+D10 - servo 9  - motor 2/2
+D11 - servo 10 - motor 3/2
 D12 - servo 11
 D13 - servo 12
 
 A6  - LED
 A7  - telemetry analog input RX battery
 
-nRF24L01+:
+nRF24L01+
 A0  - CE
 A1  - CSN
-software SPI:
+software SPI
 A2  - SCK
 A3  - MOSI
 A4  - MISO
