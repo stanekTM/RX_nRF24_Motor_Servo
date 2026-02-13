@@ -9,11 +9,19 @@ void motor_setup()
   pinMode(pins_motor1[1], OUTPUT);
   set_PWM_prescaler(pins_motor1[0], PRESCALER_TIMER2_3_11);
 #endif
+
 #if defined(MOTOR2)
   pinMode(pins_motor2[0], OUTPUT);
   pinMode(pins_motor2[1], OUTPUT);
   set_PWM_prescaler(pins_motor2[0], PRESCALER_TIMER1_9_10);
 #endif
+
+#if defined(MOTOR2PB)
+  pinMode(pins_motor2PB[0], OUTPUT);
+  pinMode(pins_motor2PB[1], OUTPUT);
+  set_PWM_prescaler(pins_motor2PB[0], PRESCALER_TIMER4_1_2);
+#endif
+
 #if defined(MIX_TANK_MOTOR1_2)
   pinMode(pins_motor1[0], OUTPUT);
   pinMode(pins_motor1[1], OUTPUT);
@@ -81,6 +89,32 @@ void motor_control()
     analogWrite(pins_motor2[1], BRAKE_MOTOR2);
   }
 #endif // End MOTOR2
+
+#if defined(MOTOR2PB)
+  int motor2_val = 0;
+  
+  // Forward motor 2
+  if (rc_packet[1] > MID_CONTROL_VAL + DEAD_ZONE)
+  {
+    motor2_val = map(rc_packet[1], MID_CONTROL_VAL + DEAD_ZONE, MAX_CONTROL_VAL, REACTION_MOTOR2, MAX_FORWARD_MOTOR2);
+    motor2_val = constrain(motor2_val, REACTION_MOTOR2, MAX_FORWARD_MOTOR2);
+    analogWrite(pins_motor2PB[1], motor2_val);
+    digitalWrite(pins_motor2PB[0], LOW);
+  }
+  // Reverse motor 2
+  else if (rc_packet[1] < MID_CONTROL_VAL - DEAD_ZONE)
+  {
+    motor2_val = map(rc_packet[1], MID_CONTROL_VAL - DEAD_ZONE, MIN_CONTROL_VAL, REACTION_MOTOR2, MAX_REVERSE_MOTOR2);
+    motor2_val = constrain(motor2_val, REACTION_MOTOR2, MAX_REVERSE_MOTOR2);
+    analogWrite(pins_motor2PB[0], motor2_val);
+    digitalWrite(pins_motor2PB[1], LOW);
+  }
+  else
+  {
+    analogWrite(pins_motor2PB[0], BRAKE_MOTOR2);
+    analogWrite(pins_motor2PB[1], BRAKE_MOTOR2);
+  }
+#endif // End MOTOR2_PB
 
 #if defined(MIX_TANK_MOTOR1_2)
   int motor1_val = 0, motor2_val = 0;

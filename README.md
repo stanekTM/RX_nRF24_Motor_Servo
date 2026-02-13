@@ -38,7 +38,9 @@ The code is Arduino.
 
 ### Arduino pins
 ```
-D2  - servo 1
+D0  - servo 1              ATmega328PB only!
+D1             - motor 2/1 ATmega328PB only!
+D2  - servo 1  - motor 2/2 ATmega328PB only!
 D3  - servo 2  - motor 1/1
 D4  - servo 3
 D5  - servo 4

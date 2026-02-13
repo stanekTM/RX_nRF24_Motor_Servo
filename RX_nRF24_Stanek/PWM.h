@@ -62,13 +62,13 @@
 //*********************************************************************************************************************
 // Pin D3 and D11 (8-bit Timer/Counter 2)
 //*********************************************************************************************************************
-//#define PWM_30HZ_TIMER2_3_11     1024
+//#define PWM_30HZ_TIMER2_3_11
 //#define PWM_122HZ_TIMER2_3_11
-//#define PWM_244HZ_TIMER2_3_11    128
-//#define PWM_488HZ_TIMER2_3_11_DEFAULT  64
-//#define PWM_976HZ_TIMER2_3_11    32
-//#define PWM_3906HZ_TIMER2_3_11   8
-//#define PWM_31250HZ_TIMER2_3_11  1
+//#define PWM_244HZ_TIMER2_3_11
+//#define PWM_488HZ_TIMER2_3_11_DEFAULT
+//#define PWM_976HZ_TIMER2_3_11
+//#define PWM_3906HZ_TIMER2_3_11
+//#define PWM_31250HZ_TIMER2_3_11
 
 #if defined(PWM_30HZ_TIMER2_3_11)
   #define PRESCALER_TIMER2_3_11  1024
@@ -93,7 +93,7 @@
 #endif
 
 //*********************************************************************************************************************
-// Pin D0(RX) (328PB 16-bit Timer/Counter 3)
+// Pin D0(RX) and specific pin PD2(2) is not paired (328PB 16-bit Timer/Counter 3)
 //*********************************************************************************************************************
 //#define PWM_30HZ_TIMER3_0     1024
 //#define PWM_122HZ_TIMER3_0    256
@@ -102,13 +102,29 @@
 //#define PWM_31250HZ_TIMER3_0  1
 
 //*********************************************************************************************************************
-// Pin D1(TX) and D2 (328PB 16-bit Timer/Counter 4)
+// Pin PD1(1)TX and specific pin PD2(2) (328PB 16-bit Timer/Counter 4)
 //*********************************************************************************************************************
-//#define PWM_30HZ_TIMER4_1_2     1024
-//#define PWM_122HZ_TIMER4_1_2    256
-//#define PWM_488HZ_TIMER4_1_2_DEFAULT  64
-//#define PWM_3906HZ_TIMER4_1_2   8
-//#define PWM_31250HZ_TIMER4_1_2  1
+//#define PWM_30HZ_TIMER4_1_2
+//#define PWM_122HZ_TIMER4_1_2
+//#define PWM_488HZ_TIMER4_1_2_DEFAULT
+//#define PWM_3906HZ_TIMER4_1_2
+//#define PWM_31250HZ_TIMER4_1_2
+
+#if defined(PWM_30HZ_TIMER4_1_2)
+  #define PRESCALER_TIMER4_1_2  1024
+#endif
+#if defined(PWM_122HZ_TIMER4_1_2)
+  #define PRESCALER_TIMER4_1_2  256
+#endif
+#if defined(PWM_488HZ_TIMER4_1_2_DEFAULT)
+  #define PRESCALER_TIMER4_1_2  64
+#endif
+#if defined(PWM_3906HZ_TIMER4_1_2)
+  #define PRESCALER_TIMER4_1_2  8
+#endif
+#if defined(PWM_31250HZ_TIMER4_1_2)
+  #define PRESCALER_TIMER4_1_2  1
+#endif
 
 //*********************************************************************************************************************
 // Set PWM prescaler
@@ -117,7 +133,7 @@ void set_PWM_prescaler(uint8_t pin, uint16_t prescale)
 {
   byte mode;
   
-  if (pin == 0 || pin == 1 || pin == 5 || pin == 6 || pin == 9 || pin == 10)
+  if (pin == 0 || pin == 1 || pin == 2 || pin == 5 || pin == 6 || pin == 9 || pin == 10)
   {
     switch (prescale) // 8-bit Timer/Counter 0, 16-bit Timer/Counter 1, 328PB 16-bit Timer/Counter 3, 328PB 16-bit Timer/Counter 4
     {
@@ -156,16 +172,16 @@ void set_PWM_prescaler(uint8_t pin, uint16_t prescale)
   {
     TCCR2B = (TCCR2B & 0b11111000) | mode;
   }
- #ifdef __AVR_ATmega328PB__
-  else if (pin == 0) // 328PB 16-bit Timer/Counter 3, PD0(0)RX, not paired with specific pin PD2(2)
+#ifdef __AVR_ATmega328PB__
+  else if (pin == 0 || pin == 2) // 328PB 16-bit Timer/Counter 3, PD0(0)RX and specific pin PD2(2) is not paired
   {
     TCCR3B = (TCCR3B & 0b11111000) | mode;
   }
-  else if (pin == 1) // 328PB 16-bit Timer/Counter 4, PD1(1)TX, paired with specific pin PD2(2)
+  else if (pin == 1 || pin == 2) // 328PB 16-bit Timer/Counter 4, PD1(1)TX and specific pin PD2(2)
   {
     TCCR4B = (TCCR4B & 0b11111000) | mode;
   }
- #endif
+#endif
 }
 
 #endif // End __PWM_h__

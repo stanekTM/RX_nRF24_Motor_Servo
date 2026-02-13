@@ -48,6 +48,11 @@
   const byte pins_motor2[2] = {9, 10};
 #endif
 
+// PWM pins PB for motor 2 (possible combination, max. 2)
+#if defined(MOTOR2PB)
+  const byte pins_motor2PB[2] = {1, 2};
+#endif
+
 #if defined(MIX_TANK_MOTOR1_2)
   const byte pins_motor1[2] = {3, 11};
   const byte pins_motor2[2] = {9, 10};
@@ -63,9 +68,9 @@
   const byte pins_servo[10] = {2, 4, 5, 6, 7, 8, 9, 10, 12, 13};
 #endif
 
-// Pins for servos (possible combination, max. 8)
-#if defined(SERVO_8CH_MOTOR1_2)
-  const byte pins_servo[8] = {2, 4, 5, 6, 7, 8, 12, 13};
+// Pins for servos (possible combination, max. 10)
+#if defined(SERVO_10CH_MOTOR1_2PB)
+  const byte pins_servo[10] = {0, 4, 5, 6, 7, 8, 9, 10, 12, 13};
 #endif
 
 // LED alarm
