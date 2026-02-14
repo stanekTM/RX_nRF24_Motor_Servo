@@ -29,7 +29,7 @@ The code is Arduino.
 * Setting the motor reaction point. Prevents initial rotor magnetic resistance
 * Setting the maximum motor power. Suitable for RC transmitters without endpoint setting
 * Brake setting
-* Pin settings specific to my PCB
+* Pin settings specific to my [PCB](documents/1micro_rx_layout.png)
 
 ### LED mode
 * Normal mode, LED is lit
