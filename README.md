@@ -65,7 +65,7 @@ A3  - MOSI
 A4  - MISO
 ```
 ### Micro RC receiver
-<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/1micro_rx_youtube.PNG" width="830"></a>
+<a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="830"></a>
 <img src="documents/3micro_rx_top.jpg" width="415"><img src="documents/4micro_rx_bottom.jpg" width="415">
 <img src="documents/2micro_rx_schema.png" width="830"><img src="documents/5micro_rx_opentx.jpg" width="830">
 
