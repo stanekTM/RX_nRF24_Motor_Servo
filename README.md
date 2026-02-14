@@ -29,7 +29,7 @@ The code is Arduino.
 * Setting the motor reaction point. Prevents initial rotor magnetic resistance
 * Setting the maximum motor power. Suitable for RC transmitters without endpoint setting
 * Brake setting
-* Pin settings specific to my [PCB](documents/1micro_rx_layout.png)
+* Pin settings specific to my [PCB](documents/2micro_rx_layout.png)
 
 ### LED mode
 * Normal mode, LED is lit
@@ -67,7 +67,7 @@ A4  - MISO
 ### Micro RC receiver
 <a href="https://youtu.be/E0pgMNPuYU4"><img src="documents/micro_rx_youtube.PNG" width="830"></a>
 <img src="documents/3micro_rx_top.jpg" width="415"><img src="documents/4micro_rx_bottom.jpg" width="415">
-<img src="documents/2micro_rx_schema.png" width="830"><img src="documents/5micro_rx_opentx.jpg" width="830">
+<img src="documents/1micro_rx_schema.png" width="830"><img src="documents/5micro_rx_opentx.jpg" width="830">
 
 ### RC receiver with tank-arcade mix
 <a href="https://youtu.be/AYgY5UkVnUM"><img src="documents/rx_mix_tank_arcade_youtube.PNG" width="830"></a>
