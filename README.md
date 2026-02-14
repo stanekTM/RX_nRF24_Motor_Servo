@@ -10,17 +10,17 @@ The code is Arduino.
 ### Works with RC transmitters
 * [**TX_nRF24_2ch_OLED**](https://github.com/stanekTM/TX_nRF24_2ch_OLED)
 * [**TX_nRF24_Xch_LED**](https://github.com/stanekTM/TX_nRF24_Xch_LED)
-* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev) <img src="documents/openavrc.png" width="260">
+* [**OpenAVRc**](https://github.com/Ingwie/OpenAVRc_Dev)   <a href="https://github.com/Ingwie/OpenAVRc_Dev"><img src="documents/openavrc.png" width="260"></a>
 
-* [**Multiprotocol**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork. <img src="documents/opentx_multi.jpg" width="260">
+* [**Multiprotocol TX**](https://github.com/stanekTM/TX_FW_Multi_Stanek) from my fork    <a href="https://github.com/stanekTM/TX_FW_Multi_Stanek"><img src="documents/opentx_multi_tx.jpg" width="260"></a>
 
 ### RC receiver specification
 * Operating Voltage: 3.3V - 6.0V (target typically 4.2V, 1S LiPo)
 * Working current of the motor driver MX1508: 1.5A (peak current up to 2.5A)
 
 ### RC receiver configuration manual in the "Config.h" file
-* Setting a unique address. It is hardcoded into the firmware of RC transmitter openAVRc and Multiprotocol
-* RF communication channel setting. It is hardcoded into the firmware of RC transmitter openAVRc and Multiprotocol
+* Setting a unique address. It is hardcoded into the firmware of RC transmitter openAVRc and Multiprotocol TX
+* RF communication channel setting. It is hardcoded into the firmware of RC transmitter openAVRc and Multiprotocol TX
 * Setting the maximum nominal battery voltage
 * Setting the minimum battery voltage for alarm
 * Servo and motor output selection

@@ -38,6 +38,9 @@ void motor_setup()
 //*********************************************************************************************************************
 void motor_control()
 {
+//*****************
+// Motor 1
+//*****************
 #if defined(MOTOR1)
   int motor1_val = 0;
   
@@ -64,6 +67,9 @@ void motor_control()
   }
 #endif // End MOTOR1
 
+//*****************
+// Motor 2
+//*****************
 #if defined(MOTOR2)
   int motor2_val = 0;
   
@@ -90,6 +96,9 @@ void motor_control()
   }
 #endif // End MOTOR2
 
+//*********************
+// Motor 2 ATmega328PB
+//*********************
 #if defined(MOTOR2PB)
   int motor2_val = 0;
   
@@ -116,6 +125,9 @@ void motor_control()
   }
 #endif // End MOTOR2_PB
 
+//***********************************
+// Motor 1 and 2 mixed "tank-arcade"
+//***********************************
 #if defined(MIX_TANK_MOTOR1_2)
   int motor1_val = 0, motor2_val = 0;
   int calc_mix = 258;

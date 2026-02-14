@@ -7,10 +7,10 @@
   Hardware includes nRF24L01+ transceiver, ATmega328P/PB processor and motor driver.
   
   Works with RC transmitters:
-  TX_nRF24_2ch_OLED          https://github.com/stanekTM/TX_nRF24_2ch_OLED
-  TX_nRF24_Xch_LED           https://github.com/stanekTM/TX_nRF24_Xch_LED
-  OpenAVRc                   https://github.com/Ingwie/OpenAVRc_Dev
-  Multiprotocol from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
+  TX_nRF24_2ch_OLED             https://github.com/stanekTM/TX_nRF24_2ch_OLED
+  TX_nRF24_Xch_LED              https://github.com/stanekTM/TX_nRF24_Xch_LED
+  OpenAVRc                      https://github.com/Ingwie/OpenAVRc_Dev
+  Multiprotocol TX from my fork https://github.com/stanekTM/TX_FW_Multi_Stanek
   *****************************************************************************************************************************
 */
 
